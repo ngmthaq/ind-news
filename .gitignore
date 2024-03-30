@@ -1,0 +1,6 @@
+/.idea
+/.vscode
+/workspace/vendor
+/workspace/node_modules
+/workspace/public/**/*
+!/workspace/public/.gitkeep

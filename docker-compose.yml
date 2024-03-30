@@ -1,0 +1,33 @@
+version: '3'
+services:
+  database:
+    container_name: ${DB_CONTAINER_NAME}
+    build: ./docker/mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - storage:/var/lib/mysql/
+    networks:
+      - www
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+  web:
+    container_name: ${WEB_CONTAINER_NAME}
+    build: ./docker/php-apache-composer-node/
+    volumes:
+      - ./workspace/:/var/www/html/
+    ports:
+      - 80:80
+    networks:
+      - www
+    depends_on:
+      - database
+volumes:
+  storage:
+networks:
+  www:
