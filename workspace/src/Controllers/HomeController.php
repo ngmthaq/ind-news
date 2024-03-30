@@ -6,6 +6,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        echo "Home";
+        $name = "Thang";
+        echo view("/pages/home.php", compact("name"));
     }
 }

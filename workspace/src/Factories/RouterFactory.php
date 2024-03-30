@@ -18,10 +18,14 @@ class RouterFactory extends Factory
     {
         switch ($key) {
             case "/":
-                // HomePage
+                // Default Page = Home Page
                 return [new HomeController(), "index"];
 
-            case "/_system/phpinfo":
+            case "/index.html":
+                // Home Page
+                return [new HomeController(), "index"];
+
+            case "/_system/phpinfo.html":
                 // PHP Info
                 return [new SystemController(), "phpinfo"];
 

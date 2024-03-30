@@ -22,6 +22,6 @@ abstract class Exception extends \Exception
      */
     public function getDetails(): array
     {
-        return $this->getDetails();
+        return $this->details;
     }
 }
