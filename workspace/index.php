@@ -106,14 +106,14 @@ try {
     /**
      * Get route string
      * 
-     * @param string $controller_name
-     * @param string $action_name
+     * @param string $path
      * @param array $queries
      * @return string
      */
-    function route(string $controller_name, string $action_name, array $queries = []): string
+    function route(string $path, array $queries = []): string
     {
-        return "/?" . http_build_query(array_merge($queries, ["c" => $controller_name, "a" => $action_name]));
+        if (count($queries) === 0) return $path;
+        return $path . "/?" . http_build_query($queries);
     }
 
     /**
@@ -129,45 +129,14 @@ try {
     /**
      * Redirect
      * 
-     * @param string $controller_name
-     * @param string $action_name
+     * @param string $path
      * @param array $queries
      * @return void
      */
-    function redirect(string $controller_name, string $action_name, array $queries = []): void
+    function redirect(string $path, array $queries = []): void
     {
-        $url = route($controller_name, $action_name, $queries);
+        $url = route($path, $queries);
         header("Refresh:0; url=$url");
-    }
-
-    /**
-     * Get controller instance
-     * 
-     * @return Src\Controllers\Controller
-     */
-    function getController(): Src\Controllers\Controller
-    {
-        $route_controller = query("c");
-        $controller_name = isset($route_controller) ? implode("", array_map(
-            fn ($string) => ucfirst($string),
-            explode("_", $route_controller)
-        )) : "Home";
-        $full_controller_name = $controller_name . "Controller";
-        $controller_autoload = "Src\\Controllers\\$full_controller_name";
-        $controller = new $controller_autoload();
-        return $controller;
-    }
-
-    /**
-     * Get action name
-     * 
-     * @return string
-     */
-    function getActionName(): string
-    {
-        $route_action = query("a");
-        $action_name = isset($route_action) ? $route_action : "index";
-        return $action_name;
     }
 
     /**
@@ -177,12 +146,16 @@ try {
      */
     function execute(): void
     {
-        $controller = getController();
-        $action = getActionName();
-        call_user_func(array($controller, $action));
+        $url = isset($_SERVER["REDIRECT_URL"]) ? $_SERVER["REDIRECT_URL"] : "/";
+        $route_factory = new Src\Factories\RouterFactory();
+        call_user_func($route_factory->resolve($url));
     }
 
     execute();
 } catch (\Throwable $th) {
-    throw $th;
+    if ($th instanceof \Src\Exceptions\NotFoundException) {
+        echo "404 - Page Not Found";
+    } else {
+        echo "500 - Server Internal Error";
+    }
 }
