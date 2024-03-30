@@ -101,26 +101,6 @@ function query(string $key = null): mixed
 }
 
 /**
- * Handle $_SESSION data
- * 
- * @param string $key
- * @param mixed $value
- * @return mixed
- */
-function session(string $key = null, mixed $value = null): mixed
-{
-    if (isset($value)) {
-        $_SESSION[$key] = $value;
-        return $value;
-    } else {
-        $data = xss($_SESSION);
-        if ($key === null) return $data;
-        if (isset($data[$key])) return $data[$key];
-        return null;
-    }
-}
-
-/**
  * Get route string
  * 
  * @param string $path
@@ -214,6 +194,12 @@ function attachment(string $attachment_location): void
     }
 }
 
+/**
+ * Get full assets path
+ * 
+ * @param string $path
+ * @return string
+ */
 function assets(string $path): string
 {
     $time = isProd() ? strtotime("today midnight") : time();

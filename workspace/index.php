@@ -22,10 +22,15 @@ try {
     ob_start();
 
     /**
+     * Initial Dotenv
+     */
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->safeLoad();
+
+    /**
      * Service available
      */
-    $is_service_available = true;
-    if (!$is_service_available) throw new Src\Exceptions\ServiceUnavailableException();
+    if ($_ENV["APP_AVAILABLE"] !== "true") throw new Src\Exceptions\ServiceUnavailableException();
 
     /**
      * Execute Application

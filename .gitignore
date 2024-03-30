@@ -1,6 +1,7 @@
 /.idea
 /.vscode
 /.env
+/workspace/.env
 /workspace/vendor
 /workspace/node_modules
 /workspace/prod.log

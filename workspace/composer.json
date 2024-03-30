@@ -2,10 +2,13 @@
   "name": "root/html",
   "description": "PHP IND NEWS",
   "type": "project",
+  "version": "1.0.0",
   "autoload": {
     "psr-4": {
       "Src\\": "src/"
     }
   },
-  "require": {}
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
+  }
 }
