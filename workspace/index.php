@@ -236,6 +236,12 @@ try {
         }
     }
 
+    function assets(string $path): string
+    {
+        $time = isProd() ? strtotime("today midnight") : time();
+        return "$path?t=$time";
+    }
+
     /**
      * Excute application
      * 

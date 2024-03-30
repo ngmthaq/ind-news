@@ -9,6 +9,8 @@
 
 <body>
     <h1>Hello <?php echo $name ?></h1>
+
+    <script src="<?php echo assets('/public/bundle.js') ?>"></script>
 </body>
 
 </html>
