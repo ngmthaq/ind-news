@@ -170,7 +170,7 @@ function view(string $_path, array $_data = []): string
     http_response_code(200);
     header("Content-Type: text/html; charset=utf-8");
     extract($_data);
-    require_once("./resources/views" . $_path);
+    require_once("./resources/views/pages/" . $_path);
     $_html = ob_get_contents();
     ob_end_clean();
     return minify($_html);
@@ -281,4 +281,10 @@ function generateRandomString(int $length = 16): string
         $randomString .= $characters[random_int(0, $charactersLength - 1)];
     }
     return $randomString;
+}
+
+function createFirebaseCredentials()
+{
+    if (file_exists("./resources/cached/firebase-credentials.json")) unlink("./resources/cached/firebase-credentials.json");
+    
 }

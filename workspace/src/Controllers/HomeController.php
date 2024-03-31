@@ -8,6 +8,6 @@ class HomeController extends Controller
     {
         $name = "Thang";
         $title = "Hello World";
-        echo view("/pages/home.php", compact("name",  "title"));
+        echo view("home.php", compact("name",  "title"));
     }
 }

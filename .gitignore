@@ -7,3 +7,5 @@
 /workspace/prod.log
 /workspace/public/**/*
 !/workspace/public/.gitkeep
+/workspace/resources/cached/**/*
+!/workspace/resources/cached/.gitkeep
