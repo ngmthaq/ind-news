@@ -41,7 +41,7 @@ try {
      * Error Handler
      */
     if ($th instanceof \Src\Exceptions\Exception) {
-        error($th->getMessage(), $th->getDetails(), $th->getCode());
+        echo error($th->getMessage(), $th->getDetails(), $th->getCode());
     } else {
         $is_prod = isProd();
         if ($is_prod) {
@@ -53,7 +53,7 @@ try {
             $info_message = "[$date $time UTC] ERROR: $message\n$trace\n\n";
             error_log($info_message, 3, $log_file);
         }
-        error(
+        echo error(
             $is_prod ? "Máy chủ đã xảy ra lỗi, vui lòng thử lại sau" : $th->getMessage(),
             $is_prod ? [] : $th->getTrace(),
             500

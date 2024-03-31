@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?php partial("head.php", compact("title")) ?>
 
 <body>
     <h1>Hello <?php echo $name ?></h1>
 
-    <script src="<?php echo assets('/public/bundle.js') ?>"></script>
+    <?php partial("scripts.php") ?>
 </body>
 
 </html>

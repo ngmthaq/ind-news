@@ -1,0 +1,1 @@
+<script src="<?php echo assets('/public/bundle.js') ?>"></script>

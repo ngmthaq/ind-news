@@ -141,14 +141,19 @@ function redirect(string $path, array $queries = []): void
  * 
  * @param array $data
  * @param array $headers
- * @return void
+ * @return string
  */
-function json(array $data, array $headers = []): void
+function json(array $data, array $headers = []): string
 {
+    ob_end_clean();
+    ob_start();
     http_response_code(200);
     foreach ($headers as $header) header($header);
     header("Content-Type: application/json; charset=utf-8");
     echo json_encode($data);
+    $json = ob_get_contents();
+    ob_end_clean();
+    return $json;
 }
 
 /**
@@ -156,9 +161,9 @@ function json(array $data, array $headers = []): void
  * 
  * @param string $_path
  * @param array $_data
- * @return void
+ * @return string
  */
-function view(string $_path, array $_data = []): void
+function view(string $_path, array $_data = []): string
 {
     ob_end_clean();
     ob_start();
@@ -168,19 +173,33 @@ function view(string $_path, array $_data = []): void
     require_once("./resources/views" . $_path);
     $_html = ob_get_contents();
     ob_end_clean();
-    echo minify($_html);
+    return minify($_html);
+}
+
+/**
+ * Import partial component
+ * 
+ * @param string $_path
+ * @param array $_data
+ * @return string
+ */
+function partial(string $_path, array $_data = []): void
+{
+    extract($_data);
+    require("./resources/views/partials/" . $_path);
 }
 
 /**
  * Attachment Response
  * 
  * @param string $attachment_location
- * @return void
+ * @return string
  */
-function attachment(string $attachment_location): void
+function attachment(string $attachment_location): string
 {
     if (file_exists($attachment_location)) {
         ob_end_clean();
+        ob_start();
         http_response_code(200);
         header("Cache-Control: public");
         header("Content-Type: " . mime_content_type($attachment_location));
@@ -188,7 +207,9 @@ function attachment(string $attachment_location): void
         header("Content-Length: " . filesize($attachment_location));
         header("Content-Disposition: attachment; filename=" . basename($attachment_location));
         readfile($attachment_location);
-        exit();
+        $buffer = ob_get_contents();
+        ob_end_clean();
+        return $buffer;
     } else {
         throw new Src\Exceptions\NotFoundException("Máy chủ không thể tìm thấy bất kỳ tập tin tương ứng trên hệ thống");
     }
@@ -224,11 +245,12 @@ function execute(): void
  * @param string $message
  * @param array $details
  * @param int $code
- * @return void
+ * @return string
  */
-function error(string $message, array $details, int $code): void
+function error(string $message, array $details, int $code): string
 {
     ob_end_clean();
+    ob_start();
     $url = isset($_SERVER["REDIRECT_URL"]) ? $_SERVER["REDIRECT_URL"] : "/";
     $is_need_json = str_ends_with($url, ".json");
     http_response_code($code);
@@ -236,11 +258,27 @@ function error(string $message, array $details, int $code): void
         header("Content-Type: application/json; charset=utf-8");
         echo json_encode(compact("code", "message", "details"));
     } else {
-        ob_start();
         header("Content-Type: text/html; charset=utf-8");
         require_once("./resources/views/pages/error.php");
-        $_html = ob_get_contents();
-        ob_end_clean();
-        echo minify($_html);
     }
+    $output = ob_get_contents();
+    ob_end_clean();
+    return minify($output);
+}
+
+/**
+ * Generate random string
+ * 
+ * @param int $length
+ * @return string
+ */
+function generateRandomString(int $length = 16): string
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[random_int(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }
