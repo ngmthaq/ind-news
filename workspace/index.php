@@ -54,7 +54,7 @@ try {
             error_log($info_message, 3, $logFile);
         }
         echo error(
-            $isProd ? "Máy chủ đã xảy ra lỗi, vui lòng thử lại sau" : $th->getMessage(),
+            $isProd ? trans("error_500") : $th->getMessage(),
             $isProd ? [] : $th->getTrace(),
             500
         );

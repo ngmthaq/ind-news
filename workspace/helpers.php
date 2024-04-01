@@ -1,5 +1,7 @@
 <?php
 
+use Src\Configs\App;
+
 /**
  * Debugger
  * 
@@ -281,4 +283,22 @@ function generateRandomString(int $length = 16): string
         $randomString .= $characters[random_int(0, $charactersLength - 1)];
     }
     return $randomString;
+}
+
+/**
+ * Translation
+ * 
+ * @param string $key
+ * @param array $placeholders
+ * @return string
+ */
+function trans(string $key, array $placeholders = []): string
+{
+    $lang = query(App::LANG_KEY) ?? input(App::LANG_KEY) ?? App::LANG_DEFAULT;
+    $file = require("./resources/lang/" . $lang . ".php");
+    $string = $file[$key];
+    foreach ($placeholders as $key => $value) {
+        $string = str_replace(":" . $key, $value, $string);
+    }
+    return $string;
 }

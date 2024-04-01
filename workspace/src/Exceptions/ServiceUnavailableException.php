@@ -4,8 +4,8 @@ namespace Src\Exceptions;
 
 class ServiceUnavailableException extends Exception
 {
-    public function __construct(string $message = "Máy chủ đang trong quá trình bảo trì, vui lòng quay lại sau ít phút")
+    public function __construct(string $message = null)
     {
-        parent::__construct(503, $message, []);
+        parent::__construct(503, isset($message) ? $message : trans("error_503"), []);
     }
 }

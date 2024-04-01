@@ -21,7 +21,7 @@ class RepoFactory extends Factory
                 return new UserRepo();
 
             default:
-                throw new \Exception("Đã xảy ra lỗi khi chạy Repository");
+                throw new \Exception(trans("error_repository_factory"));
         }
     }
 }

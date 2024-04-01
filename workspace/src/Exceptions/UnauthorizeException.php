@@ -4,8 +4,8 @@ namespace Src\Exceptions;
 
 class UnauthorizeException extends Exception
 {
-    public function __construct(string $message = "Vui lòng đăng nhập để thực hiện hành động này")
+    public function __construct(string $message = null)
     {
-        parent::__construct(401, $message, []);
+        parent::__construct(401, isset($message) ? $message : trans("error_401"), []);
     }
 }

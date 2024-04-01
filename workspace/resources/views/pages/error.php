@@ -50,7 +50,7 @@
         <h1><?php echo $code ?></h1>
         <p><?php echo $message ?></p>
         <?php if ($code !== 503) : ?>
-            <a href="/">Quay lại trang chủ</a>
+            <a href="/"><?php echo trans("back_to_homepage") ?></a>
         <?php endif ?>
     </div>
 </body>

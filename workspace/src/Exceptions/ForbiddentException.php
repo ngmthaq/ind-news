@@ -4,8 +4,8 @@ namespace Src\Exceptions;
 
 class ForbiddentException extends Exception
 {
-    public function __construct(string $message = "Bạn không được cấp quyền để thực hiện hành động này")
+    public function __construct(string $message = null)
     {
-        parent::__construct(403, $message, []);
+        parent::__construct(403, isset($message) ? $message : trans("error_403"), []);
     }
 }

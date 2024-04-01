@@ -6,6 +6,6 @@ class FailureValidationExeption extends Exception
 {
     public function __construct(array $details)
     {
-        parent::__construct(422, "Dữ liệu gửi lên không đúng định dạng", $details);
+        parent::__construct(422, trans("error_422"), $details);
     }
 }

@@ -4,8 +4,8 @@ namespace Src\Exceptions;
 
 class NotFoundException extends Exception
 {
-    public function __construct(string $message = "Chúng tôi không thể tìm thấy trang bạn đang tìm kiếm")
+    public function __construct(string $message = null)
     {
-        parent::__construct(404, $message, []);
+        parent::__construct(404, isset($message) ? $message : trans("error_404"), []);
     }
 }
