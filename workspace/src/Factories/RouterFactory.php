@@ -35,7 +35,7 @@ class RouterFactory extends Factory
                 $userRepo = $this->repoFactory->resolve(IUserRepo::class);
                 return [new HomeController($userRepo), "index"];
 
-            case "/_system/phpinfo.html":
+            case "/_/system/phpinfo.html":
                 // PHP Info
                 return [new SystemController(), "phpinfo"];
 
