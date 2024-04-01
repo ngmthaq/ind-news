@@ -3,19 +3,28 @@
 namespace Src\Configs;
 
 use Google\Cloud\Storage\StorageObject;
+use Google\Cloud\Firestore\FirestoreClient;
+use Kreait\Firebase\Contract\Firestore;
 use Kreait\Firebase\Contract\Storage;
 use Kreait\Firebase\Factory;
 
 class Firebase
 {
+    // https://github.com/kreait/firebase-php/blob/7.x/docs/overview.rst
     private Factory $factory;
+
+    // https://github.com/GoogleCloudPlatform/php-docs-samples/tree/main/storage
     private Storage $storage;
+
+    // https://github.com/GoogleCloudPlatform/php-docs-samples/tree/main/firestore
+    private Firestore $firestore;
 
     public function __construct()
     {
         $this->factory = new Factory();
         $this->factory->withServiceAccount($_ENV["FIREBASE_CREDENTIALS_JSON"]);
         $this->storage = $this->factory->createStorage();
+        $this->firestore = $this->factory->createFirestore();
     }
 
     /**
@@ -36,6 +45,26 @@ class Firebase
     public function getStorage(): Storage
     {
         return $this->storage;
+    }
+
+    /**
+     * Get firebase firestore
+     * 
+     * @return Firestore
+     */
+    public function getFirestore(): Firestore
+    {
+        return $this->firestore;
+    }
+
+    /**
+     * Get firebase firestore database
+     * 
+     * @return FirestoreClient
+     */
+    public function getDatabase(): FirestoreClient
+    {
+        return $this->firestore->database();
     }
 
     /**
