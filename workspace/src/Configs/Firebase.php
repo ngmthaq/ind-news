@@ -65,8 +65,8 @@ class Firebase
         $bucket = $this->storage->getBucket();
         $object = $bucket->upload($file, ["name" => $name, "predefinedAcl" => "publicRead"]);
         fclose($file);
-        $public_url = "https://storage.googleapis.com/" . $_ENV["FIREBASE_STORAGE_BUCKET"] . "/" . $name;
-        return compact("object", "public_url");
+        $publicUrl = "https://storage.googleapis.com/" . $_ENV["FIREBASE_STORAGE_BUCKET"] . "/" . $name;
+        return compact("object", "publicUrl");
     }
 
     /**

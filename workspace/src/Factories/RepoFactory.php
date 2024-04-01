@@ -8,7 +8,13 @@ use Src\Repos\UserRepo;
 
 class RepoFactory extends Factory
 {
-    public function resolve(string $key): Repo
+    /**
+     * Resolve repository
+     * 
+     * @param string $key
+     * @return mixed
+     */
+    public function resolve(string $key): mixed
     {
         switch ($key) {
             case IUserRepo::class:

@@ -43,19 +43,19 @@ try {
     if ($th instanceof \Src\Exceptions\Exception) {
         echo error($th->getMessage(), $th->getDetails(), $th->getCode());
     } else {
-        $is_prod = isProd();
-        if ($is_prod) {
+        $isProd = isProd();
+        if ($isProd) {
             $message = $th->getMessage();
             $trace = $th->getTraceAsString();
             $date = gmdate("Y-m-d", time());
             $time = gmdate("H:i:s", time());
-            $log_file = "./prod.log";
+            $logFile = "./prod.log";
             $info_message = "[$date $time UTC] ERROR: $message\n$trace\n\n";
-            error_log($info_message, 3, $log_file);
+            error_log($info_message, 3, $logFile);
         }
         echo error(
-            $is_prod ? "Máy chủ đã xảy ra lỗi, vui lòng thử lại sau" : $th->getMessage(),
-            $is_prod ? [] : $th->getTrace(),
+            $isProd ? "Máy chủ đã xảy ra lỗi, vui lòng thử lại sau" : $th->getMessage(),
+            $isProd ? [] : $th->getTrace(),
             500
         );
     }

@@ -32,11 +32,11 @@ class Csrf
     {
         if (strtoupper($_SERVER["REQUEST_METHOD"]) === "POST") {
             $token = $_SESSION[self::TOKEN_KEY];
-            $user_token = input(self::TOKEN_KEY);
+            $userToken = input(self::TOKEN_KEY);
             $details = [self::TOKEN_KEY => "Token Missmatch"];
             if (empty($token)) throw new BadRequestException($details);
-            if (empty($user_token)) throw new BadRequestException($details);
-            if ($token !== $user_token) throw new BadRequestException($details);
+            if (empty($userToken)) throw new BadRequestException($details);
+            if ($token !== $userToken) throw new BadRequestException($details);
         }
     }
 

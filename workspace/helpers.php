@@ -192,21 +192,21 @@ function partial(string $_path, array $_data = []): void
 /**
  * Attachment Response
  * 
- * @param string $attachment_location
+ * @param string $attachmentLocation
  * @return string
  */
-function attachment(string $attachment_location): string
+function attachment(string $attachmentLocation): string
 {
-    if (file_exists($attachment_location)) {
+    if (file_exists($attachmentLocation)) {
         ob_end_clean();
         ob_start();
         http_response_code(200);
         header("Cache-Control: public");
-        header("Content-Type: " . mime_content_type($attachment_location));
+        header("Content-Type: " . mime_content_type($attachmentLocation));
         header("Content-Transfer-Encoding: Binary");
-        header("Content-Length: " . filesize($attachment_location));
-        header("Content-Disposition: attachment; filename=" . basename($attachment_location));
-        readfile($attachment_location);
+        header("Content-Length: " . filesize($attachmentLocation));
+        header("Content-Disposition: attachment; filename=" . basename($attachmentLocation));
+        readfile($attachmentLocation);
         $buffer = ob_get_contents();
         ob_end_clean();
         return $buffer;
@@ -235,8 +235,8 @@ function assets(string $path): string
 function execute(): void
 {
     $url = isset($_SERVER["REDIRECT_URL"]) ? $_SERVER["REDIRECT_URL"] : "/";
-    $route_factory = new Src\Factories\RouterFactory();
-    call_user_func($route_factory->resolve($url));
+    $routerFactory = new Src\Factories\RouterFactory();
+    call_user_func($routerFactory->resolve($url));
 }
 
 /**
@@ -252,9 +252,9 @@ function error(string $message, array $details, int $code): string
     ob_end_clean();
     ob_start();
     $url = isset($_SERVER["REDIRECT_URL"]) ? $_SERVER["REDIRECT_URL"] : "/";
-    $is_need_json = str_ends_with($url, ".json");
+    $isNeedJson = str_ends_with($url, ".json");
     http_response_code($code);
-    if ($is_need_json) {
+    if ($isNeedJson) {
         header("Content-Type: application/json; charset=utf-8");
         echo json_encode(compact("code", "message", "details"));
     } else {
@@ -281,10 +281,4 @@ function generateRandomString(int $length = 16): string
         $randomString .= $characters[random_int(0, $charactersLength - 1)];
     }
     return $randomString;
-}
-
-function createFirebaseCredentials()
-{
-    if (file_exists("./resources/cached/firebase-credentials.json")) unlink("./resources/cached/firebase-credentials.json");
-    
 }
