@@ -106,11 +106,6 @@ const configs = {
     rules: getRules("development"),
   },
   plugins: [new CleanWebpackPlugin()],
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-    },
-  },
 };
 
 module.exports = (env, argv) => {

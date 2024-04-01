@@ -1,0 +1,140 @@
+// Colors
+$black: #000;
+$white: #fff;
+$blue: #0d6efd;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #198754;
+$teal: #20c997;
+$cyan: #0dcaf0;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+
+// Variant Colors
+$primary: $blue;
+$secondary: $gray-600;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-900;
+
+// Breakpoints
+$grid-breakpoints-xs: 0;
+$grid-breakpoints-sm: 576px;
+$grid-breakpoints-md: 768px;
+$grid-breakpoints-lg: 992px;
+$grid-breakpoints-xl: 1200px;
+$grid-breakpoints-xxl: 1400px;
+$grid-breakpoints: (
+  xs: $grid-breakpoints-xs,
+  sm: $grid-breakpoints-sm,
+  md: $grid-breakpoints-md,
+  lg: $grid-breakpoints-lg,
+  xl: $grid-breakpoints-xl,
+  xxl: $grid-breakpoints-xxl,
+);
+
+// Container Max Widths
+$container-max-widths-sm: 540px;
+$container-max-widths-md: 720px;
+$container-max-widths-lg: 960px;
+$container-max-widths-xl: 1140px;
+$container-max-widths-xxl: 1320px;
+$container-max-widths: (
+  sm: $container-max-widths-sm,
+  md: $container-max-widths-md,
+  lg: $container-max-widths-lg,
+  xl: $container-max-widths-xl,
+  xxl: $container-max-widths-xxl,
+);
+
+// Modal Variables
+$modal-scale-transform: scale(1);
+
+// Z-index Variables
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-offcanvas-backdrop: 1040;
+$zindex-offcanvas: 1045;
+$zindex-modal-backdrop: 1050;
+$zindex-modal: 1055;
+$zindex-popover: 1070;
+$zindex-tooltip: 1080;
+$zindex-toast: 1090;
+$zindex-common-loading: 1500;
+
+// Fonts
+$font-family-sans-serif: "Poppins", sans-serif;
+$font-size-base: 0.9rem;
+
+// Border Radius
+$border-radius: 0.3rem;
+$border-radius-sm: 0.2rem;
+$border-radius-lg: 0.4rem;
+$border-radius-xl: 0.8rem;
+$border-radius-xxl: 1.5rem;
+$border-radius-pill: 40rem;
+$form-check-input-border-radius: 0.2em;
+
+// Mixins
+@mixin downXl {
+  @media (max-width: #{map.get($grid-breakpoints, "xl") - 1px}) {
+    @content;
+  }
+}
+
+@mixin downLg {
+  @media (max-width: #{map.get($grid-breakpoints, "lg") - 1px}) {
+    @content;
+  }
+}
+
+@mixin downMd {
+  @media (max-width: #{map.get($grid-breakpoints, "md") - 1px}) {
+    @content;
+  }
+}
+
+@mixin downSm {
+  @media (max-width: #{map.get($grid-breakpoints, "sm") - 1px}) {
+    @content;
+  }
+}
+
+@mixin upXs {
+  @media (min-width: #{map.get($grid-breakpoints, "xs")}) {
+    @content;
+  }
+}
+
+@mixin upSm {
+  @media (min-width: #{map.get($grid-breakpoints, "sm")}) {
+    @content;
+  }
+}
+
+@mixin upMd {
+  @media (min-width: #{map.get($grid-breakpoints, "md")}) {
+    @content;
+  }
+}
+
+@mixin upLg {
+  @media (min-width: #{map.get($grid-breakpoints, "lg")}) {
+    @content;
+  }
+}
