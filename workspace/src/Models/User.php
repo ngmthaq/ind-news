@@ -9,8 +9,14 @@ class User extends Model
     public string $password;
     public string $name;
 
-    public function __construct(string $id, string $username, string $password, string $name, int $createdAt, int $updatedAt)
-    {
+    public function __construct(
+        string $id,
+        string $username,
+        string $password,
+        string $name,
+        int $createdAt,
+        int $updatedAt
+    ) {
         $this->id = $id;
         $this->username = $username;
         $this->password = $password;

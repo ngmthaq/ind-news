@@ -2,6 +2,7 @@
 
 namespace Src\Factories;
 
+use Src\Controllers\AuthController;
 use Src\Controllers\HomeController;
 use Src\Controllers\SystemController;
 use Src\Exceptions\NotFoundException;
@@ -34,6 +35,10 @@ class RouterFactory extends Factory
                 // Home Page
                 $userRepo = $this->repoFactory->resolve(IUserRepo::class);
                 return [new HomeController($userRepo), "index"];
+
+            case "/login.html";
+                // Login Page
+                return [new AuthController(), "login"];
 
             case "/_/system/phpinfo.html":
                 // PHP Info

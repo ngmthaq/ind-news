@@ -236,7 +236,7 @@ function assets(string $path): string
  */
 function execute(): void
 {
-    $url = isset($_SERVER["REDIRECT_URL"]) ? $_SERVER["REDIRECT_URL"] : "/";
+    $url = str_replace("/public", "", $_SERVER["REDIRECT_URL"]);
     $routerFactory = new Src\Factories\RouterFactory();
     call_user_func($routerFactory->resolve($url));
 }
