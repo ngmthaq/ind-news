@@ -10,6 +10,7 @@ return [
     "error_500" => "Máy chủ đã xảy ra lỗi, vui lòng thử lại sau",
     "error_503" => "Máy chủ đang trong quá trình bảo trì, vui lòng quay lại sau ít phút",
     "error_repository_factory" => "Đã xảy ra lỗi khi chạy Repository",
+    "error_compress_image" => "Đã xảy ra lỗi khi xử lý tối ưu hình ảnh",
 
     // Common text
     "back_to_homepage" => "Quay lại trang chủ",

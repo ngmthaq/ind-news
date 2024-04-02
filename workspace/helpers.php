@@ -276,9 +276,9 @@ function error(string $message, array $details, int $code): string
  */
 function generateRandomString(int $length = 16): string
 {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $charactersLength = strlen($characters);
-    $randomString = '';
+    $randomString = "";
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[random_int(0, $charactersLength - 1)];
     }
@@ -301,4 +301,28 @@ function trans(string $key, array $placeholders = []): string
         $string = str_replace(":" . $key, $value, $string);
     }
     return $string;
+}
+
+/**
+ * Compress image ("image/jpeg", "image/gif", "image/png")
+ * 
+ * @param string $source
+ * @param string $destination
+ * @param int $quality
+ * @return bool
+ */
+function compressImage(string $source, string $destination, int $quality = 75): bool
+{
+    $info = getimagesize($source);
+    $info = getimagesize($source);
+    if ($info["mime"] == "image/jpeg") {
+        $image = imagecreatefromjpeg($source);
+    } elseif ($info["mime"] == "image/gif") {
+        $image = imagecreatefromgif($source);
+    } elseif ($info["mime"] == "image/png") {
+        $image = imagecreatefrompng($source);
+    } else {
+        throw new \Exception(trans("error_compress_image"));
+    }
+    return imagejpeg($image, $destination, $quality);
 }
