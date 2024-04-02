@@ -1,1 +1,1 @@
-<script src="<?php echo assets('/public/bundle.js') ?>"></script>
+<script src="<?php echo assets('/vendor/bundle.js') ?>"></script>

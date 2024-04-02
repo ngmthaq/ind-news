@@ -99,7 +99,7 @@ const configs = {
   entry: "./resources/js/index.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "./public"),
+    path: path.resolve(__dirname, "./public/vendor"),
     clean: true,
   },
   module: {

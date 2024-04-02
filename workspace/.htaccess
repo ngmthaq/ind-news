@@ -1,24 +1,17 @@
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
+# Disable directory browsing
+Options -Indexes
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^public
+RewriteRule ^(.*)$ public/$1 [L]
 
-    RewriteEngine On
+#PROTECT ENV FILE
+<Files .env>
+order allow,deny
+Deny from all
+</Files>
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_STT_AUTHORIZATION:%{HTTP:Authorization}]
-
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
-
-    # Exclude the rewriting process for static files
-    RewriteRule ^(.*\.(woff|ttf|svg|js|ico|gif|jpg|png|css|htc|xml|txt))$ $1 [L]
-
-    # Send Requests To Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
-</IfModule>
+#PROTECT ENV FILE
+<Files .htaccess>
+order allow,deny
+Deny from all
+</Files>

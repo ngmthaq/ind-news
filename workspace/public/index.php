@@ -2,14 +2,19 @@
 
 try {
     /**
+     * ROOT DIR = workspace folder = var/www/html in docker container
+     */
+    define("ROOT", str_replace("/public", "", __DIR__));
+
+    /**
      * Auloload
      */
-    require_once("./vendor/autoload.php");
+    require_once("../vendor/autoload.php");
 
     /**
      * Helpers
      */
-    require_once("./helpers.php");
+    require_once("../helpers.php");
 
     /**
      * Initialize session data
@@ -24,7 +29,7 @@ try {
     /**
      * Initial Dotenv
      */
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv = Dotenv\Dotenv::createImmutable(ROOT);
     $dotenv->safeLoad();
 
     /**

@@ -2,7 +2,6 @@
 
 namespace Src\Configs;
 
-
 class App
 {
     public const LANG_KEY = "lang";

@@ -5,7 +5,7 @@
 /workspace/vendor
 /workspace/node_modules
 /workspace/prod.log
-/workspace/public/**/*
-!/workspace/public/.gitkeep
+/workspace/public/vendor/**/*
+!/workspace/public/vendor/.gitkeep
 /workspace/resources/cached/**/*
 !/workspace/resources/cached/.gitkeep

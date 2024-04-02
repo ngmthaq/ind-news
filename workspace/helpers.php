@@ -50,7 +50,7 @@ function minify(string $buffer): string
  */
 function isProd(): bool
 {
-    return file_exists("./prod.log");
+    return file_exists(ROOT . "/prod.log");
 }
 
 /**
@@ -172,7 +172,7 @@ function view(string $_path, array $_data = []): string
     http_response_code(200);
     header("Content-Type: text/html; charset=utf-8");
     extract($_data);
-    require_once("./resources/views/pages/" . $_path);
+    require_once(ROOT . "/resources/views/pages/" . $_path);
     $_html = ob_get_contents();
     ob_end_clean();
     return minify($_html);
@@ -188,7 +188,7 @@ function view(string $_path, array $_data = []): string
 function partial(string $_path, array $_data = []): void
 {
     extract($_data);
-    require("./resources/views/partials/" . $_path);
+    require(ROOT . "/resources/views/partials/" . $_path);
 }
 
 /**
@@ -261,7 +261,7 @@ function error(string $message, array $details, int $code): string
         echo json_encode(compact("code", "message", "details"));
     } else {
         header("Content-Type: text/html; charset=utf-8");
-        require_once("./resources/views/pages/error.php");
+        require_once(ROOT . "/resources/views/pages/error.php");
     }
     $output = ob_get_contents();
     ob_end_clean();
@@ -295,7 +295,7 @@ function generateRandomString(int $length = 16): string
 function trans(string $key, array $placeholders = []): string
 {
     $lang = query(App::LANG_KEY) ?? input(App::LANG_KEY) ?? App::LANG_DEFAULT;
-    $file = require("./resources/lang/" . $lang . ".php");
+    $file = require(ROOT . "/resources/lang/" . $lang . ".php");
     $string = $file[$key];
     foreach ($placeholders as $key => $value) {
         $string = str_replace(":" . $key, $value, $string);
