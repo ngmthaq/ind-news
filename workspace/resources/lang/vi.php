@@ -20,4 +20,5 @@ return [
     "email_address" => "Địa chỉ email",
     "password" => "Mật khẩu",
     "password_placeholder" => "Nhập mật khẩu của bạn tại đây",
+    "cms_title" => "INDUSTRY NEWS CMS",
 ];

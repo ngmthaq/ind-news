@@ -13,9 +13,9 @@
         </div>
         <div class="form-container">
             <div class="mb-4">
-                <h1 class="text-center">
-                    <?php echo trans("welcome_back") ?>
-                </h1>
+                <h2 class="text-center">
+                    <?php echo trans("cms_title") ?>
+                </h2>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label required">
