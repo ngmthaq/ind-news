@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 
-<?php partial("head.php", compact("title")) ?>
+<head>
+    <?php partial("head.php", compact("title")) ?>
+</head>
 
 <body>
     <h1>Hello <?php echo $name ?></h1>

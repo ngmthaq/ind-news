@@ -2,6 +2,8 @@
 
 namespace Src\Controllers;
 
+use Src\Models\Seo;
+
 class AuthController extends Controller
 {
     /**
@@ -22,7 +24,8 @@ class AuthController extends Controller
                 // Fail
             }
         } else {
-            echo view("/login.php");
+            $seo = new Seo("Login", "", "", "", "");
+            echo view("/login.php", compact("seo"));
         }
     }
 

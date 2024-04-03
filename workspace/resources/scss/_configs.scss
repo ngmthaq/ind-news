@@ -90,6 +90,9 @@ $border-radius-xxl: 1.5rem;
 $border-radius-pill: 40rem;
 $form-check-input-border-radius: 0.2em;
 
+// BS Icons Configs
+$bootstrap-icons-font-dir: "../../node_modules/bootstrap-icons/font/fonts";
+
 // Mixins
 @mixin downXl {
   @media (max-width: #{map.get($grid-breakpoints, "xl") - 1px}) {

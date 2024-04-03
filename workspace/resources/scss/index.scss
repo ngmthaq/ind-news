@@ -1,6 +1,6 @@
 @import "./configs";
-
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
 
 * {
   font-optical-sizing: auto;
@@ -78,4 +78,16 @@
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-style: italic;
+}
+
+.required {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: -8px;
+    color: red;
+    content: "*";
+  }
 }

@@ -15,7 +15,7 @@
     RewriteRule ^ %1 [L,R=301]
 
     # Exclude the rewriting process for static files
-    RewriteRule ^(.*\.(woff|ttf|svg|js|ico|gif|jpg|png|css|htc|xml|txt))$ $1 [L]
+    RewriteRule ^(.*\.(woff|woff2|ttf|svg|js|ico|gif|jpg|png|css|htc|xml|txt))$ $1 [L]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
