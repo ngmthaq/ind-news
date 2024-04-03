@@ -3,28 +3,14 @@
 
 <head>
     <?php partial("head.php", compact("seo")) ?>
-
-    <style>
-        .login-form {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .form-container {
-            width: 520px;
-            max-width: 100vw;
-            box-shadow: var(--bs-box-shadow);
-            padding: 40px 24px;
-            border-radius: 8px;
-        }
-    </style>
 </head>
 
 <body>
     <form method="post" class="login-form">
+        <?php echo Src\Configs\Csrf::input() ?>
+        <div class="logo-container">
+            <img src="<?php echo assets("/images/logo-transparent.png") ?>" alt="Logo">
+        </div>
         <div class="form-container">
             <div class="mb-4">
                 <h1 class="text-center">
@@ -35,7 +21,7 @@
                 <label for="email" class="form-label required">
                     <?php echo trans("email_address") ?>
                 </label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com">
+                <input type="text" name="email" id="email" class="form-control" placeholder="name@example.com">
             </div>
             <div class="mb-4">
                 <label for="password" class="form-label required">
@@ -43,13 +29,13 @@
                 </label>
                 <div class="input-group mb-3">
                     <input type="password" name="password" id="password" class="form-control" placeholder="<?php echo trans("password_placeholder") ?>">
-                    <button class="btn btn-outline-secondary" type="button" id="toggle-show-password" data-show-icon="bi bi-eye-fill" data-hide-icon="bi bi-eye-slash-fill">
+                    <button class="btn btn-outline-secondary" type="button" id="toggle-show-password" data-show="false" data-show-icon="bi bi-eye-fill" data-hide-icon="bi bi-eye-slash-fill">
                         <i class="bi bi-eye-fill"></i>
                     </button>
                 </div>
             </div>
             <div class="mb-3">
-                <button name="login" type="button" class="btn btn-primary w-100">
+                <button name="login" type="submit" class="btn btn-primary w-100">
                     <?php echo trans("login") ?>
                 </button>
             </div>
