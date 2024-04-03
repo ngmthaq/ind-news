@@ -27,23 +27,31 @@
     <form method="post" class="login-form">
         <div class="form-container">
             <div class="mb-4">
-                <h1 class="text-center">Welcome Back</h1>
+                <h1 class="text-center">
+                    <?php echo trans("welcome_back") ?>
+                </h1>
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label required">Email Address</label>
+                <label for="email" class="form-label required">
+                    <?php echo trans("email_address") ?>
+                </label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com">
             </div>
             <div class="mb-4">
-                <label for="password" class="form-label required">Password</label>
+                <label for="password" class="form-label required">
+                    <?php echo trans("password") ?>
+                </label>
                 <div class="input-group mb-3">
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password here">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="<?php echo trans("password_placeholder") ?>">
                     <button class="btn btn-outline-secondary" type="button" id="toggle-show-password" data-show-icon="bi bi-eye-fill" data-hide-icon="bi bi-eye-slash-fill">
                         <i class="bi bi-eye-fill"></i>
                     </button>
                 </div>
             </div>
             <div class="mb-3">
-                <button name="login" type="button" class="btn btn-primary w-100">Login</button>
+                <button name="login" type="button" class="btn btn-primary w-100">
+                    <?php echo trans("login") ?>
+                </button>
             </div>
         </div>
     </form>

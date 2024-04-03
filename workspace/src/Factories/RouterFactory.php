@@ -36,7 +36,7 @@ class RouterFactory extends Factory
                 $userRepo = $this->repoFactory->resolve(IUserRepo::class);
                 return [new HomeController($userRepo), "index"];
 
-            case "/login.html";
+            case "/admin/login.html";
                 // Login Page
                 return [new AuthController(), "login"];
 

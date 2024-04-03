@@ -295,11 +295,11 @@ function generateRandomString(int $length = 16): string
 function trans(string $key, array $placeholders = []): string
 {
     $lang = query(App::LANG_KEY) ?? input(App::LANG_KEY) ?? App::LANG_DEFAULT;
-    $file = require(ROOT . "/resources/lang/" . $lang . ".php");
+    $path = ROOT . "/resources/lang/" . $lang . ".php";
+    if (!file_exists($path)) $path = ROOT . "/resources/lang/" . App::LANG_DEFAULT . ".php";
+    $file = require($path);
     $string = $file[$key];
-    foreach ($placeholders as $key => $value) {
-        $string = str_replace(":" . $key, $value, $string);
-    }
+    foreach ($placeholders as $key => $value) $string = str_replace(":" . $key, $value, $string);
     return $string;
 }
 

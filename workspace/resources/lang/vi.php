@@ -14,4 +14,10 @@ return [
 
     // Common text
     "back_to_homepage" => "Quay lại trang chủ",
+    "login" => "Đăng nhập",
+    "admin_login" => "Đăng nhập với tư cách quản trị viên",
+    "welcome_back" => "Chào mừng quay trở lại",
+    "email_address" => "Địa chỉ email",
+    "password" => "Mật khẩu",
+    "password_placeholder" => "Nhập mật khẩu của bạn tại đây",
 ];

@@ -24,7 +24,7 @@ class AuthController extends Controller
                 // Fail
             }
         } else {
-            $seo = new Seo("Login", "", "", "", "");
+            $seo = new Seo(trans("admin_login"), "", "", "", "");
             echo view("/login.php", compact("seo"));
         }
     }
