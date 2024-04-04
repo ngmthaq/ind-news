@@ -16,6 +16,31 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+  dbms:
+    container_name: ${DBMS_CONTAINER_NAME}
+    build: ./docker/phpmyadmin
+    depends_on:
+      - database
+    restart: always
+    ports:
+      - 3307:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - www
+  cache:
+    container_name: ${CACHE_CONTAINER_NAME}
+    build: ./docker/redis
+    restart: always
+    volumes:
+      - storage:/data
+    networks:
+      - www
+    ports:
+      - 6379:6379
+    depends_on:
+      - database
+      - dbms
   web:
     container_name: ${WEB_CONTAINER_NAME}
     build: ./docker/php-apache-composer-node/
@@ -27,6 +52,8 @@ services:
       - www
     depends_on:
       - database
+      - dbms
+      - cache
 volumes:
   storage:
 networks:
