@@ -3,7 +3,6 @@
 namespace Src\Factories;
 
 use Src\Repos\IUserRepo;
-use Src\Repos\Repo;
 use Src\Repos\UserRepo;
 
 class RepoFactory extends Factory
