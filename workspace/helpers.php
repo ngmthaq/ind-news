@@ -288,6 +288,20 @@ function generateRandomString(int $length = 16): string
 }
 
 /**
+ * Get lang data
+ * 
+ * @return array
+ */
+function getLangData(): array
+{
+    $lang = query(App::LANG_KEY) ?? input(App::LANG_KEY) ?? App::LANG_DEFAULT;
+    $path = ROOT . "/resources/lang/" . $lang . ".php";
+    if (!file_exists($path)) $path = ROOT . "/resources/lang/" . App::LANG_DEFAULT . ".php";
+    $data = require($path);
+    return $data;
+}
+
+/**
  * Translation
  * 
  * @param string $key
@@ -296,10 +310,7 @@ function generateRandomString(int $length = 16): string
  */
 function trans(string $key, array $placeholders = []): string
 {
-    $lang = query(App::LANG_KEY) ?? input(App::LANG_KEY) ?? App::LANG_DEFAULT;
-    $path = ROOT . "/resources/lang/" . $lang . ".php";
-    if (!file_exists($path)) $path = ROOT . "/resources/lang/" . App::LANG_DEFAULT . ".php";
-    $file = require($path);
+    $file = getLangData();
     $string = $file[$key];
     foreach ($placeholders as $key => $value) $string = str_replace(":" . $key, $value, $string);
     return $string;
@@ -441,4 +452,39 @@ function arraySnakeToCamel(array $input): array
         }
     }
     return $result;
+}
+
+/**
+ * Convert string to slug
+ * 
+ * @param string $string
+ * @param string $symbol
+ * @return string
+ */
+function convertStringToSlug(string $string, string $symbol = '-'): string
+{
+    if (empty($string)) throw new \Exception("");
+    $character_a = array('à', 'á', 'ạ', 'ả', 'ã', 'â', 'ầ', 'ấ', 'ậ', 'ẩ', 'ẫ', 'ă', 'ằ', 'ắ', 'ặ', 'ẳ', 'ẵ');
+    $character_e = array('è', 'é', 'ẹ', 'ẻ', 'ẽ', 'ê', 'ề', 'ế', 'ệ', 'ể', 'ễ');
+    $character_i = array('ì', 'í', 'ị', 'ỉ', 'ĩ');
+    $character_o = array('ò', 'ó', 'ọ', 'ỏ', 'õ', 'ô', 'ồ', 'ố', 'ộ', 'ổ', 'ỗ', 'ơ', 'ờ', 'ớ', 'ợ', 'ở', 'ỡ');
+    $character_u = array('ù', 'ú', 'ụ', 'ủ', 'ũ', 'ư', 'ừ', 'ứ', 'ự', 'ử', 'ữ');
+    $character_y = array('ỳ', 'ý', 'ỵ', 'ỷ', 'ỹ');
+    $character_d = array('đ');
+    $character_symbol = array('!', '@', '%', '^', '*', '(', ')', '+', '=', '<', '>', '?', '/', ', ', '.', ':', ';', '|', '"', '&', '#', '[', ']', '~', '$', '_', '__', '--', ' ');
+    $alias = mb_strtolower($string, 'UTF-8');
+    $alias = trim($alias);
+    $alias = str_replace($character_a, 'a', $alias);
+    $alias = str_replace($character_e, 'e', $alias);
+    $alias = str_replace($character_i, 'i', $alias);
+    $alias = str_replace($character_o, 'o', $alias);
+    $alias = str_replace($character_u, 'u', $alias);
+    $alias = str_replace($character_y, 'y', $alias);
+    $alias = str_replace($character_d, 'd', $alias);
+    $symbol_modify = '-';
+    if (isset($symbol)) $symbol_modify = $symbol;
+    $alias = str_replace($character_symbol, $symbol_modify, $alias);
+    $alias = preg_replace('/--+/', $symbol_modify, $alias);
+    $alias = preg_replace('/__+/', $symbol_modify, $alias);
+    return $alias . $symbol . time();
 }

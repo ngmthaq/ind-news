@@ -38,7 +38,6 @@
 
     <?php partial("generic-scripts.php") ?>
     <script src="<?php echo assets('/vendor/adminLogin.bundle.js') ?>"></script>
-
 </body>
 
 </html>

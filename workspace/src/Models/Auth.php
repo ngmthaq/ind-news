@@ -37,7 +37,9 @@ class Auth extends User
      */
     public static function check(): bool
     {
-        $cookie = Aes::decrypt($_COOKIE[self::AUTH_KEY]);
+        $cipher = $_COOKIE[self::AUTH_KEY];
+        if (empty($cipher)) return false;
+        $cookie = Aes::decrypt($cipher);
         $credentials = json_decode($cookie, true);
         $email = $credentials["email"];
         $password = $credentials["password"];
