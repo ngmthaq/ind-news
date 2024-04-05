@@ -37,7 +37,7 @@ class Aes
         $hmac = substr($c, $ivlen, $sha2len = 32);
         $ciphertextRaw = substr($c, $ivlen + $sha2len);
         $originalPlaintext = openssl_decrypt($ciphertextRaw, $cipher, $_ENV["APP_KEY"], OPENSSL_RAW_DATA, $iv);
-        $calcmac = hash_hmac('sha256', $ciphertextRaw, $_ENV["APP_KEY"], true);
+        $calcmac = hash_hmac("sha256", $ciphertextRaw, $_ENV["APP_KEY"], true);
         if (hash_equals($hmac, $calcmac)) return $originalPlaintext;
         throw new \Exception(trans("error_aes_decrypt"));
     }
