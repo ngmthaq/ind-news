@@ -8,6 +8,7 @@
 <body>
     <form method="post" class="login-form">
         <?php echo Src\Configs\Csrf::input() ?>
+        <input type="hidden" name="callbackUrl" value="<?php echo query("callbackUrl") ?>">
         <div class="logo-container">
             <img src="<?php echo assets("/images/logo-transparent.png") ?>" alt="Logo">
         </div>

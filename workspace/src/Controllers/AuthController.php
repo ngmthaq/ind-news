@@ -14,7 +14,8 @@ class AuthController extends Controller
      */
     public function login(): void
     {
-        if (Auth::check()) redirect("/admin/dashboard.html");
+        $callbackUrl = input("callbackUrl");
+        if (Auth::check()) redirect($callbackUrl ?? "/admin/dashboard.html");
         $loginInput = input("login");
         if (isset($loginInput)) $this->verifyLoginForm();
         $seo = new Seo(trans("admin_login"), "", "", "", "");
@@ -30,8 +31,9 @@ class AuthController extends Controller
     {
         $email = input("email");
         $password = input("password");
+        $callbackUrl = input("callbackUrl");
         $errors = $this->attempt($email, $password);
-        if (count($errors) === 0) redirect("/admin/dashboard.html");
+        if (count($errors) === 0) redirect($callbackUrl ?? "/admin/dashboard.html");
         flashFromArray($errors);
         redirect("/admin/login.html");
     }
