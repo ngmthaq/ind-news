@@ -1,4 +1,4 @@
 <?php
 
 if (!file_exists("./prod.log")) touch("./prod.log");
-exec("yarn build");
+echo shell_exec("yarn build");
