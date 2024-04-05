@@ -12,9 +12,6 @@
 <?php if (isset($seo)) : ?>
     <!-- SEO Title Handler -->
     <title><?php echo $seo->title ?></title>
-    <meta name="title" content="<?php echo $seo->title ?>" />
-    <meta property="og:title" content="<?php echo $seo->title ?>" />
-    <meta property="twitter:title" content="<?php echo $seo->title ?>" />
 
     <!-- SEO Icon Handler -->
     <link rel="icon" href="<?php echo assets("/images/favicon.ico") ?>" type="image/x-icon">
@@ -40,6 +37,9 @@
         <meta name="description" content="<?php echo $seo->description ?>" />
         <meta property="og:description" content="<?php echo $seo->description ?>" />
         <meta property="twitter:description" content="<?php echo $seo->description ?>" />
+        <meta name="title" content="<?php echo $seo->title ?>" />
+        <meta property="og:title" content="<?php echo $seo->title ?>" />
+        <meta property="twitter:title" content="<?php echo $seo->title ?>" />
     <?php endif; ?>
 
     <!-- SEO Keywords Handler -->
