@@ -2,13 +2,13 @@
 <html lang="vi">
 
 <head>
-    <?php partial("head.php", compact("title")) ?>
+    <?php partial("generic-head.php", compact("title")) ?>
 </head>
 
 <body>
     <h1>Hello <?php echo $name ?></h1>
 
-    <?php partial("scripts.php") ?>
+    <?php partial("generic-scripts.php") ?>
 </body>
 
 </html>

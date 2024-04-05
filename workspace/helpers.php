@@ -123,6 +123,7 @@ function route(string $path, array $queries = []): string
 function reload(): void
 {
     header("Refresh:0");
+    exit();
 }
 
 /**
@@ -136,6 +137,7 @@ function redirect(string $path, array $queries = []): void
 {
     $url = route($path, $queries);
     header("Refresh:0; url=$url");
+    exit();
 }
 
 /**

@@ -14,13 +14,11 @@ class AuthController extends Controller
      */
     public function login(): void
     {
+        if (Auth::check()) redirect("/");
         $loginInput = input("login");
-        if (isset($loginInput)) {
-            $this->verifyLoginForm();
-        } else {
-            $seo = new Seo(trans("admin_login"), "", "", "", "");
-            echo view("/login.php", compact("seo"));
-        }
+        if (isset($loginInput)) $this->verifyLoginForm();
+        $seo = new Seo(trans("admin_login"), "", "", "", "");
+        echo view("/login.php", compact("seo"));
     }
 
     /**
@@ -33,12 +31,9 @@ class AuthController extends Controller
         $email = input("email");
         $password = input("password");
         $errors = $this->attempt($email, $password);
-        if (count($errors) === 0) {
-            redirect("/");
-        } else {
-            flashFromArray($errors);
-            redirect("/admin/login.html");
-        }
+        if (count($errors) === 0) redirect("/");
+        flashFromArray($errors);
+        redirect("/admin/login.html");
     }
 
     /**
@@ -54,16 +49,16 @@ class AuthController extends Controller
     {
         $errors = [];
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $errors["email"] = trans("invalidate_email_error");
+            $errors["email"] = trans("error_invalidate_email");
         }
 
         if (trim($password) === "") {
-            $errors["password"] = trans("required_field_error");
+            $errors["password"] = trans("error_required_field");
         }
 
         if (count($errors) === 0) {
             $user = Auth::attempt($email, $password);
-            if (!$user) $errors["email"] = trans("unauthorize_error");
+            if (!$user) $errors["email"] = trans("error_unauthorize");
         }
 
         return $errors;

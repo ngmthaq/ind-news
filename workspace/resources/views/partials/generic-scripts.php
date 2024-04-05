@@ -1,0 +1,1 @@
+<script src="<?php echo assets('/vendor/index.bundle.js') ?>"></script>

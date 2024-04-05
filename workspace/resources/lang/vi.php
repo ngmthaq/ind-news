@@ -13,6 +13,11 @@ return [
     "error_compress_image" => "Đã xảy ra lỗi khi xử lý tối ưu hình ảnh",
     "error_aes_decrypt" => "Đã xảy ra lỗi khi giải mã dữ liệu",
 
+    // Validation errors
+    "error_invalidate_email" => "Email không đúng định dạng",
+    "error_required_field" => "Vui lòng không để trống trường này",
+    "error_unauthorize" => "Sai địa chỉ email hoặc mật khẩu",
+
     // Common text
     "back_to_homepage" => "Quay lại trang chủ",
     "login" => "Đăng nhập",
@@ -22,9 +27,4 @@ return [
     "password" => "Mật khẩu",
     "password_placeholder" => "Nhập mật khẩu của bạn tại đây",
     "cms_title" => "INDUSTRY NEWS CMS",
-
-    // Validation errors
-    "invalidate_email_error" => "Email không đúng định dạng",
-    "required_field_error" => "Vui lòng không để trống trường này",
-    "unauthorize_error" => "Sai địa chỉ email hoặc mật khẩu",
 ];
