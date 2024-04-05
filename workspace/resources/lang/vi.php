@@ -27,4 +27,7 @@ return [
     "password" => "Mật khẩu",
     "password_placeholder" => "Nhập mật khẩu của bạn tại đây",
     "cms_title" => "INDUSTRY NEWS CMS",
+
+    // Common document title
+    "dashboard_title" => "Dashboard"
 ];

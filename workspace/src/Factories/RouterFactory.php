@@ -2,6 +2,7 @@
 
 namespace Src\Factories;
 
+use Src\Controllers\AdminDashboardController;
 use Src\Controllers\AuthController;
 use Src\Controllers\HomeController;
 use Src\Controllers\SystemController;
@@ -39,6 +40,10 @@ class RouterFactory extends Factory
             case "/admin/login.html";
                 // Login Page
                 return [new AuthController(), "login"];
+
+            case "/admin/dashboard.html";
+                // Admin Dashboard Page
+                return [new AdminDashboardController(), "index"];
 
             case "/_/system/phpinfo.html":
                 // PHP Info
