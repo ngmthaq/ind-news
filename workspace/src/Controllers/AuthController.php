@@ -2,12 +2,13 @@
 
 namespace Src\Controllers;
 
+use Src\Models\Auth;
 use Src\Models\Seo;
 
 class AuthController extends Controller
 {
     /**
-     * Render login page
+     * Render login page and verify login form
      * 
      * @return void
      */
@@ -15,17 +16,28 @@ class AuthController extends Controller
     {
         $loginInput = input("login");
         if (isset($loginInput)) {
-            $email = input("email");
-            $password = input("password");
-            $errors = $this->attempt($email, $password);
-            if (count($errors) === 0) {
-                // Success
-            } else {
-                // Fail
-            }
+            $this->verifyLoginForm();
         } else {
             $seo = new Seo(trans("admin_login"), "", "", "", "");
             echo view("/login.php", compact("seo"));
+        }
+    }
+
+    /**
+     * Verify login form
+     * 
+     * @return void
+     */
+    public function verifyLoginForm(): void
+    {
+        $email = input("email");
+        $password = input("password");
+        $errors = $this->attempt($email, $password);
+        if (count($errors) === 0) {
+            redirect("/");
+        } else {
+            flashFromArray($errors);
+            redirect("/admin/login.html");
         }
     }
 
@@ -40,6 +52,20 @@ class AuthController extends Controller
      */
     private function attempt(string $email, string $password): array
     {
-        return [];
+        $errors = [];
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            $errors["email"] = trans("invalidate_email_error");
+        }
+
+        if (trim($password) === "") {
+            $errors["password"] = trans("required_field_error");
+        }
+
+        if (count($errors) === 0) {
+            $user = Auth::attempt($email, $password);
+            if (!$user) $errors["email"] = trans("unauthorize_error");
+        }
+
+        return $errors;
     }
 }

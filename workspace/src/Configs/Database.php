@@ -19,6 +19,7 @@ class Database
         $username = $_ENV["DB_USERNAME"];
         $password = $_ENV["DB_PASSWORD"];
         $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$name", $username, $password);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**
@@ -54,7 +55,6 @@ class Database
     {
         $stm = $this->pdo->prepare($this->sql);
         $stm->setFetchMode(PDO::FETCH_ASSOC);
-        $stm->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $stm->execute($this->params);
         $this->sql = "";
         $this->params = [];

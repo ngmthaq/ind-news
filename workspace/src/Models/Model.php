@@ -4,8 +4,8 @@ namespace Src\Models;
 
 abstract class Model
 {
-    public int|null $createdAt = null;
-    public int|null $updatedAt = null;
+    public string|null $createdAt = null;
+    public string|null $updatedAt = null;
 
     /**
      * Create model from array data

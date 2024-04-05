@@ -2,8 +2,6 @@
 
 namespace Src\Factories;
 
-use Src\Controllers\Controller;
-
 abstract class Factory
 {
     /**

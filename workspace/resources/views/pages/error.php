@@ -17,7 +17,8 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            flex-direction: column;
         }
 
         div {
@@ -26,6 +27,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            max-width: 600px;
         }
 
         h1 {
@@ -53,6 +55,9 @@
             <a href="/"><?php echo trans("back_to_homepage") ?></a>
         <?php endif ?>
     </div>
+    <pre>
+        <?php print_r($details) ?>
+    </pre>
 </body>
 
 </html>

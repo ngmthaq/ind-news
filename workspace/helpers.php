@@ -326,3 +326,117 @@ function compressImage(string $source, string $destination, int $quality = 75): 
     }
     return imagejpeg($image, $destination, $quality);
 }
+
+/**
+ * Get/Set old form data input
+ * 
+ * @param string $key
+ * @param string $data
+ * @return string
+ */
+function old(string $key, string $data = null): string
+{
+    if (empty($_SESSION["_old"])) $_SESSION["_old"] = [];
+
+    if (isset($data)) {
+        $_SESSION["_old"][$key] = $data;
+    } else {
+        $data = $_SESSION["_old"][$key];
+        unset($_SESSION["_old"][$key]);
+    }
+
+    return $data ?? "";
+}
+
+/**
+ * Get/Set flash message
+ * 
+ * @param string $key
+ * @param string $data
+ * @return string
+ */
+function flash(string $key, string $message = null): string
+{
+    if (empty($_SESSION["_flash"])) $_SESSION["_flash"] = [];
+
+    if (isset($message)) {
+        $_SESSION["_flash"][$key] = $message;
+    } else {
+        $message = $_SESSION["_flash"][$key];
+        unset($_SESSION["_flash"][$key]);
+    }
+
+    return $message ?? "";
+}
+
+/**
+ * Get/Set flash message
+ * 
+ * @param array $messages
+ * @return array
+ */
+function flashFromArray(array $messages): array
+{
+    foreach ($messages as $key => $message) flash($key, $message);
+    return $messages;
+}
+
+/**
+ * Convert string from camelCase to snake_case
+ * 
+ * @param string $input
+ * @return string
+ */
+function camelToSnake(string $input): string
+{
+    return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
+}
+
+/**
+ * Convert string from snake_case to camelCase
+ * 
+ * @param string $input
+ * @return string
+ */
+function snakeToCamel(string $input): string
+{
+    return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
+}
+
+/**
+ * Convert array from camelCase to snake_case
+ * 
+ * @param array $input
+ * @return array
+ */
+function arrayCamelToSnake(array $input): array
+{
+    $result = [];
+    foreach ($input as $key => $value) {
+        if (gettype($value) === "array") {
+            $result[camelToSnake($key)] = arrayCamelToSnake($value);
+        } else {
+            $result[camelToSnake($key)] = $value;
+        }
+    }
+    return $result;
+}
+
+/**
+ * Convert array from snake_case to camelCase
+ * 
+ * @param array $input
+ * @return array
+ */
+function arraySnakeToCamel(array $input): array
+{
+    $result = [];
+    foreach ($input as $key => $value) {
+        if (gettype($value) === "array") {
+            $result[snakeToCamel($key)] = arraySnakeToCamel($value);
+        } else {
+            $result[snakeToCamel($key)] = $value;
+        }
+    }
+    return $result;
+}

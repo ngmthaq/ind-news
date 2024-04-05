@@ -5,20 +5,20 @@ namespace Src\Models;
 class User extends Model
 {
     public string $id;
-    public string $username;
+    public string $email;
     public string $password;
     public string $name;
 
     public function __construct(
         string $id,
-        string $username,
+        string $email,
         string $password,
         string $name,
-        int $createdAt,
-        int $updatedAt
+        string $createdAt,
+        string $updatedAt
     ) {
         $this->id = $id;
-        $this->username = $username;
+        $this->email = $email;
         $this->password = $password;
         $this->name = $name;
         $this->createdAt = $createdAt;
@@ -35,7 +35,7 @@ class User extends Model
     {
         return new User(
             $source["id"],
-            $source["username"],
+            $source["email"],
             $source["password"],
             $source["name"],
             $source["createdAt"],
