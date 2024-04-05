@@ -2,8 +2,8 @@
 
 namespace Src\Factories;
 
-use Src\Repos\IUserRepo;
 use Src\Repos\UserRepo;
+use Src\Repos\UserRepoInterface;
 
 class RepoFactory extends Factory
 {
@@ -16,7 +16,7 @@ class RepoFactory extends Factory
     public function resolve(string $key): mixed
     {
         switch ($key) {
-            case IUserRepo::class:
+            case UserRepoInterface::class:
                 return new UserRepo();
 
             default:

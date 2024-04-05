@@ -2,7 +2,7 @@
 
 namespace Src\Repos;
 
-class UserRepo extends Repo implements IUserRepo
+class UserRepo extends Repo implements UserRepoInterface
 {
     //
 }

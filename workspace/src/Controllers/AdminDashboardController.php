@@ -5,7 +5,7 @@ namespace Src\Controllers;
 use Src\Models\Auth;
 use Src\Models\Seo;
 
-class AdminDashboardController extends Controller
+class AdminDashboardController extends AdminCmsController
 {
     public function index()
     {

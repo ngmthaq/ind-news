@@ -7,7 +7,7 @@ use Src\Controllers\AuthController;
 use Src\Controllers\HomeController;
 use Src\Controllers\SystemController;
 use Src\Exceptions\NotFoundException;
-use Src\Repos\IUserRepo;
+use Src\Repos\UserRepoInterface;
 
 class RouterFactory extends Factory
 {
@@ -29,12 +29,12 @@ class RouterFactory extends Factory
         switch ($key) {
             case "/":
                 // Default Page = Home Page
-                $userRepo = $this->repoFactory->resolve(IUserRepo::class);
+                $userRepo = $this->repoFactory->resolve(UserRepoInterface::class);
                 return [new HomeController($userRepo), "index"];
 
             case "/index.html":
                 // Home Page
-                $userRepo = $this->repoFactory->resolve(IUserRepo::class);
+                $userRepo = $this->repoFactory->resolve(UserRepoInterface::class);
                 return [new HomeController($userRepo), "index"];
 
             case "/admin/login.html";
