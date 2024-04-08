@@ -20,6 +20,8 @@ class Database
         $password = $_ENV["DB_PASSWORD"];
         $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$name", $username, $password);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->sql = "";
+        $this->params = [];
     }
 
     /**

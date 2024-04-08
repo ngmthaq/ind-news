@@ -1,10 +1,7 @@
 import $ from "jquery";
-import { trans } from "./helpers";
 import "../scss/adminLogin.scss";
 
 $(function () {
-  console.log(trans("cms_title"));
-
   $("#toggle-show-password").on("click", function () {
     const isShowPassword = $(this).data("show");
     const showIcon = $(this).data("show-icon");

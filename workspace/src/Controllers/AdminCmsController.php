@@ -2,12 +2,14 @@
 
 namespace Src\Controllers;
 
+use Src\Repos\FeatureRepoInterface;
+
 class AdminCmsController extends Controller
 {
-    protected array $navItems;
+    protected FeatureRepoInterface $featureRepo;
 
-    public function __construct()
+    public function __construct(FeatureRepoInterface $featureRepo)
     {
-        $this->navItems = [];
+        $this->featureRepo = $featureRepo;
     }
 }

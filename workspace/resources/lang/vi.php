@@ -27,7 +27,15 @@ return [
     "password" => "Mật khẩu",
     "password_placeholder" => "Nhập mật khẩu của bạn tại đây",
     "cms_title" => "INDUSTRY NEWS CMS",
+    "logout" => "Đăng xuất",
 
     // Common document title
-    "dashboard_title" => "Dashboard"
+    "cms_dashboard" => "Trang tổng quan",
+    "cms_user_management" => "Quản lý người dùng",
+    "cms_category_management" => "Quản lý danh mục",
+    "cms_post_management" => "Quản lý bài viết",
+    "cms_attachment_management" => "Quản lý tệp tin",
+    "cms_ads_management" => "Nội dung quảng cáo",
+    "cms_activity_management" => "Hoạt động hệ thống",
+    "cms_profile" => "Hồ sơ cá nhân",
 ];

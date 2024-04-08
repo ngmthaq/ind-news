@@ -12,7 +12,8 @@ class AdminDashboardController extends AdminCmsController
         $user = Auth::user();
         if (empty($user)) redirect("/admin/login.html", ["callbackUrl" => "/admin/dashboard.html"]);
         if ($user->isAdmin() === false) redirect("/");
-        $seo = new Seo(trans("dashboard_title"), "", "", "", "");
-        echo view("admin/dashboard.php", compact("seo"));
+        $seo = new Seo(trans("cms_dashboard"), "", "", "", "");
+        $features = $this->featureRepo->all();
+        echo view("admin-dashboard.php", compact("seo", "features"));
     }
 }

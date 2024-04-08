@@ -313,7 +313,7 @@ function trans(string $key, array $placeholders = []): string
     $file = getLangData();
     $string = $file[$key];
     foreach ($placeholders as $key => $value) $string = str_replace(":" . $key, $value, $string);
-    return $string;
+    return $string ?? $key;
 }
 
 /**

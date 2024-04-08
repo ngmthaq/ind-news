@@ -59,6 +59,7 @@ const configs = {
   entry: {
     index: "./resources/js/index.js",
     adminLogin: "./resources/js/adminLogin.js",
+    adminDashboard: "./resources/js/adminDashboard.js",
   },
   output: {
     filename: "[name].bundle.js",

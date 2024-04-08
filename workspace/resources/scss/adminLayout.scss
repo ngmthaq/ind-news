@@ -1,0 +1,123 @@
+@import "./configs";
+
+body {
+  overflow-y: hidden;
+
+  #admin-layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    & .admin-sidebar {
+      width: 300px;
+      height: 100%;
+      border-right: 1px dashed $gray-300;
+      flex-shrink: 0;
+      transition: all 100ms linear;
+
+      &-logo {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        border-bottom: 1px dashed $gray-300;
+        padding: 0 16px;
+
+        & img {
+          height: 40px;
+          width: auto;
+          object-fit: contain;
+        }
+
+        & h2 {
+          font-weight: bold;
+          color: $dark;
+          padding: 0;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      &-list {
+        height: calc(100% - 80px - 40px);
+        padding: 16px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        &-item {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          color: $dark;
+          padding: 12px;
+          border-radius: 4px;
+          text-decoration: none;
+          text-transform: uppercase;
+          font-size: 14px;
+          gap: 16px;
+          font-weight: 600;
+          margin-bottom: 8px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            background-color: rgba($color: $primary, $alpha: 0.1);
+          }
+
+          &.active {
+            background-color: rgba($color: $primary, $alpha: 0.9);
+            color: $light;
+          }
+        }
+      }
+
+      & #sidebar-toggle-width-button {
+        height: 40px;
+        width: 100%;
+        outline: none;
+        border: none;
+        border-top: 1px dashed $gray-300;
+        background-color: transparent;
+
+        &:hover {
+          background-color: rgba($color: $primary, $alpha: 0.1);
+        }
+      }
+
+      &.minimize {
+        width: 96px;
+
+        & .admin-sidebar-logo h2 {
+          display: none;
+        }
+
+        & .admin-sidebar-list-item {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+        }
+
+        & .admin-sidebar-list-item span {
+          display: none;
+        }
+      }
+    }
+
+    & .admin-wrapper {
+      width: 100%;
+      height: 100%;
+      transition: all 100ms linear;
+    }
+  }
+}
