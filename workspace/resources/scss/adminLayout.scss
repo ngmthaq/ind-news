@@ -2,6 +2,7 @@
 
 body {
   overflow-y: hidden;
+  background-color: $light;
 
   #admin-layout {
     width: 100%;
@@ -13,7 +14,7 @@ body {
     & .admin-sidebar {
       width: 300px;
       height: 100%;
-      border-right: 1px dashed $gray-300;
+      border-right: 1px dashed $gray-400;
       flex-shrink: 0;
       transition: all 100ms linear;
 
@@ -24,7 +25,7 @@ body {
         align-items: center;
         justify-content: center;
         gap: 16px;
-        border-bottom: 1px dashed $gray-300;
+        border-bottom: 1px dashed $gray-400;
         padding: 0 16px;
 
         & img {
@@ -86,7 +87,7 @@ body {
         width: 100%;
         outline: none;
         border: none;
-        border-top: 1px dashed $gray-300;
+        border-top: 1px dashed $gray-400;
         background-color: transparent;
 
         &:hover {
