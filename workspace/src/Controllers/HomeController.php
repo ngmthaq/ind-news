@@ -2,12 +2,14 @@
 
 namespace Src\Controllers;
 
+use Src\Models\Seo;
+
 class HomeController extends Controller
 {
     public function index()
     {
         $name = "Thang";
-        $title = "Hello World";
-        echo view("home.php", compact("name",  "title"));
+        $seo = new Seo(trans("title_homepage"), "", "", "", "");
+        echo view("home.php", compact("name",  "seo"));
     }
 }

@@ -19,7 +19,7 @@ class AuthController extends Controller
         $loginInput = input("login");
         if (isset($loginInput)) $this->verifyLoginForm();
         $seo = new Seo(trans("admin_login"), "", "", "", "");
-        echo view("/login.php", compact("seo"));
+        echo view("/admin-login.php", compact("seo"));
     }
 
     /**
