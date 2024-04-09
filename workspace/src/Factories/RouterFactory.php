@@ -11,7 +11,9 @@ use Src\Controllers\AdminPostManagementController;
 use Src\Controllers\AdminProfileController;
 use Src\Controllers\AdminUserManagementController;
 use Src\Controllers\AuthController;
+use Src\Controllers\CategoryController;
 use Src\Controllers\HomeController;
+use Src\Controllers\PostController;
 use Src\Controllers\SystemController;
 use Src\Exceptions\NotFoundException;
 use Src\Repos\FeatureRepoInterface;
@@ -49,6 +51,10 @@ class RouterFactory extends Factory
             case "/admin/login.html";
                 // Login Page
                 return [new AuthController(), "login"];
+
+            case "/admin/attempt.html";
+                // Attempt Login Form
+                return [new AuthController(), "verifyLoginForm"];
 
             case "/admin/dashboard.html";
                 // Admin Dashboard Page
@@ -95,8 +101,36 @@ class RouterFactory extends Factory
                 return [new SystemController(), "phpinfo"];
 
             default:
-                // 404 Page Not Found
-                throw new NotFoundException();
+                // Resolve Dynamic Route or 404 Not Found
+                return $this->resolveDynamicRoute($key);
         }
+    }
+
+    /**
+     * Resolve dynamic route with controller and action
+     * 
+     * @param string $key
+     * @return array
+     */
+    protected function resolveDynamicRoute(string $key): array
+    {
+        // Dynamic Category Page
+        if (preg_match("/^\/categories\/[a-zA-Z0-9-]+.html$/", $key)) {
+            $slug = str_replace("/categories/", "", $key);
+            $slug = str_replace(".html", "", $slug);
+            $slug = htmlentities($slug);
+            return [new CategoryController(), "index", [$slug]];
+        }
+
+        // Dynamic Post Page
+        if (preg_match("/^\/posts\/[a-zA-Z0-9-]+.html$/", $key)) {
+            $slug = str_replace("/posts/", "", $key);
+            $slug = str_replace(".html", "", $slug);
+            $slug = htmlentities($slug);
+            return [new PostController(), "index", [$slug]];
+        }
+
+        // 404 Not Found
+        throw new NotFoundException();
     }
 }

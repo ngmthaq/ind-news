@@ -17,7 +17,7 @@ class AdminCmsController extends Controller
     protected function checkAuthAndPermission()
     {
         $user = Auth::user();
-        if (empty($user)) redirect("/admin/login.html", ["callbackUrl" => "/admin/dashboard.html"]);
+        if (empty($user)) redirect("/admin/login.html", ["callbackUrl" => getCurrentUrl()]);
         if ($user->isAdmin() === false) redirect("/");
     }
 }

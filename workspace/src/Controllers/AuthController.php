@@ -14,10 +14,7 @@ class AuthController extends Controller
      */
     public function login(): void
     {
-        $callbackUrl = input("callbackUrl");
-        if (Auth::check()) redirect($callbackUrl ?? "/admin/dashboard.html");
-        $loginInput = input("login");
-        if (isset($loginInput)) $this->verifyLoginForm();
+        if (Auth::check()) redirect("/admin/dashboard.html");
         $seo = new Seo(trans("admin_login"), "", "", "", "");
         echo view("/admin-login.php", compact("seo"));
     }
@@ -39,8 +36,9 @@ class AuthController extends Controller
      * 
      * @return void
      */
-    private function verifyLoginForm(): void
+    public function verifyLoginForm(): void
     {
+        if (strtoupper($_SERVER["REQUEST_METHOD"]) === "GET") redirect("/admin/login.html");
         $email = input("email");
         $password = input("password");
         $callbackUrl = input("callbackUrl");

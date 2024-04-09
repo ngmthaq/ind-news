@@ -58,7 +58,7 @@
 
     <?php if (isProd() === false) : ?>
         <script>
-            console.error("PHP Exception: <?php echo $message ?> (<?php echo $code ?>)");
+            console.error("Error: <?php echo $message ?> (<?php echo $code ?>)");
             console.error(<?php echo json_encode($details) ?>);
         </script>
     <?php endif ?>

@@ -1,7 +1,5 @@
 <?php
 
-use Src\Configs\App;
-
 /**
  * Debugger
  * 
@@ -136,7 +134,7 @@ function reload(): void
 function redirect(string $path, array $queries = []): void
 {
     $url = route($path, $queries);
-    header("Refresh:0; url=$url");
+    header("Location: $url");
     exit();
 }
 
@@ -240,7 +238,9 @@ function execute(): void
 {
     $url = str_replace("/public", "", $_SERVER["REDIRECT_URL"]);
     $routerFactory = new Src\Factories\RouterFactory();
-    call_user_func($routerFactory->resolve($url));
+    list($controller, $action, $argv) = $routerFactory->resolve($url);
+    $argv = $argv ?? [];
+    call_user_func_array([$controller, $action], $argv);
 }
 
 /**
@@ -294,9 +294,9 @@ function generateRandomString(int $length = 16): string
  */
 function getLangData(): array
 {
-    $lang = query(App::LANG_KEY) ?? input(App::LANG_KEY) ?? App::LANG_DEFAULT;
+    $lang = query(Src\Configs\App::LANG_KEY) ?? input(Src\Configs\App::LANG_KEY) ?? Src\Configs\App::LANG_DEFAULT;
     $path = ROOT . "/resources/lang/" . $lang . ".php";
-    if (!file_exists($path)) $path = ROOT . "/resources/lang/" . App::LANG_DEFAULT . ".php";
+    if (!file_exists($path)) $path = ROOT . "/resources/lang/" . Src\Configs\App::LANG_DEFAULT . ".php";
     $data = require($path);
     return $data;
 }
@@ -487,4 +487,14 @@ function convertStringToSlug(string $string, string $symbol = '-'): string
     $alias = preg_replace('/--+/', $symbol_modify, $alias);
     $alias = preg_replace('/__+/', $symbol_modify, $alias);
     return $alias . $symbol . time();
+}
+
+/**
+ * Get current url
+ * 
+ * @return string
+ */
+function getCurrentUrl(): string
+{
+    return str_replace("/public", "", $_SERVER["REDIRECT_URL"]);
 }

@@ -6,9 +6,9 @@ use Src\Models\Seo;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(string $slug)
     {
-        $name = "Thang";
+        $name = $slug;
         $seo = new Seo(trans("title_post"), "", "", "", "");
         echo view("post.php", compact("name",  "seo"));
     }
