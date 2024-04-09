@@ -17,7 +17,7 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             flex-direction: column;
         }
 
@@ -55,9 +55,13 @@
             <a href="/"><?php echo trans("back_to_homepage") ?></a>
         <?php endif ?>
     </div>
-    <pre>
-        <?php print_r($details) ?>
-    </pre>
+
+    <?php if (isProd() === false) : ?>
+        <script>
+            console.error("PHP Exception: <?php echo $message ?> (<?php echo $code ?>)");
+            console.error(<?php echo json_encode($details) ?>);
+        </script>
+    <?php endif ?>
 </body>
 
 </html>
