@@ -3,7 +3,7 @@ import CookieJs from "js-cookie";
 import "../scss/index.scss";
 
 (async () => {
-  const key = "PHPADMSIDEBARCLOSE";
+  const key = "PHPASBC";
   const isOpenSidebar = Boolean(CookieJs.get(key));
   const hideIcon = $("#sidebar-toggle-width-button").data("hide-icon");
   const showIcon = $("#sidebar-toggle-width-button").data("show-icon");
@@ -20,7 +20,9 @@ import "../scss/index.scss";
 
   $("#sidebar-toggle-width-button").on("click", function () {
     let isOpenSidebar = Boolean(CookieJs.get(key));
-    isOpenSidebar ? CookieJs.remove(key) : CookieJs.set(key, 1);
+    isOpenSidebar
+      ? CookieJs.set(key, "", { expires: 30 })
+      : CookieJs.set(key, "1", { expires: 30 });
     isOpenSidebar = Boolean(CookieJs.get(key));
 
     $("#sidebar-toggle-width-button").html(

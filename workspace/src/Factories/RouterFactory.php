@@ -35,6 +35,10 @@ class RouterFactory extends Factory
                 // Home Page
                 return [new HomeController(), "index"];
 
+            case "/logout.html";
+                // Logout
+                return [new AuthController(), "logout"];
+
             case "/admin/login.html";
                 // Login Page
                 return [new AuthController(), "login"];

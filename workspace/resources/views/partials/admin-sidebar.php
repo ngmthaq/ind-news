@@ -10,10 +10,14 @@
                 <span><?php echo trans($feature->i18nKey) ?></span>
             </a>
         <?php endforeach; ?>
-        <a href="#" class="admin-sidebar-list-item" title="<?php echo trans("logout") ?>">
-            <i class="bi bi-box-arrow-right"></i>
-            <span><?php echo trans("logout") ?></span>
-        </a>
+        <form action="/logout.html" method="post">
+            <?php echo Src\Configs\Csrf::input() ?>
+            <input type="hidden" name="callbackUrl" value="/admin/login.html">
+            <button type="submit" class="admin-sidebar-list-item" title="<?php echo trans("logout") ?>">
+                <i class="bi bi-box-arrow-right"></i>
+                <span><?php echo trans("logout") ?></span>
+            </button>
+        </form>
     </div>
     <button id="sidebar-toggle-width-button" data-hide-icon="bi bi-chevron-bar-left" data-show-icon="bi bi-chevron-bar-right">
         <i class="bi bi-chevron-bar-left"></i>

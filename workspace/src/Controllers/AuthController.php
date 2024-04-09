@@ -23,11 +23,23 @@ class AuthController extends Controller
     }
 
     /**
+     * Logout
+     * 
+     * @return void
+     */
+    public function logout(): void
+    {
+        $callbackUrl = input("callbackUrl");
+        Auth::logout();
+        redirect($callbackUrl ?? "/");
+    }
+
+    /**
      * Verify login form
      * 
      * @return void
      */
-    public function verifyLoginForm(): void
+    private function verifyLoginForm(): void
     {
         $email = input("email");
         $password = input("password");
