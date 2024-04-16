@@ -61,6 +61,7 @@ const configs = {
     adminLogin: "./resources/js/adminLogin.js",
     adminDashboard: "./resources/js/adminDashboard.js",
     adminSetting: "./resources/js/adminSetting.js",
+    adminUserManagement: "./resources/js/adminUserManagement.js",
   },
   output: {
     filename: "[name].bundle.js",

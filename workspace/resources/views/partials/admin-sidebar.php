@@ -19,7 +19,7 @@
             </button>
         </form>
     </div>
-    <button id="sidebar-toggle-width-button" data-hide-icon="bi bi-chevron-bar-left" data-show-icon="bi bi-chevron-bar-right">
+    <button id="sidebar-toggle-width-button" title="<?php echo trans("toggle_sidebar_tooltip") ?>" data-hide-icon="bi bi-chevron-bar-left" data-show-icon="bi bi-chevron-bar-right">
         <i class="bi bi-chevron-bar-left"></i>
     </button>
 </aside>

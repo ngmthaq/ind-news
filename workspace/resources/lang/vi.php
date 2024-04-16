@@ -33,6 +33,19 @@ return [
     "dark_mode" => "Chế độ tối",
     "language" => "Ngôn ngữ",
     "save" => "Lưu",
+    "name" => "Họ tên",
+    "dob" => "Ngày sinh",
+    "gender" => "Giới tính",
+    "role" => "Phân quyền",
+    "status" => "Trạng thái",
+    "action" => "Hành động",
+    "no_data" => "Không có dữ liệu hiển thị",
+    "admin" => "QTV",
+    "user" => "Người dùng",
+    "male" => "Nam",
+    "female" => "Nữ",
+    "other" => "Khác",
+    "toggle_sidebar_tooltip" => "Nhấn Ctrl+B để chuyển đổi đóng/mở thanh sidebar",
 
     // Common document title
     "cms_dashboard" => "Trang tổng quan",
@@ -54,4 +67,8 @@ return [
     "seo_keywords" => "Từ khóa của trang web (SEO Keywords)",
     "seo_url" => "Đường dẫn chính (SEO Main URL)",
     "seo_image" => "Hình ảnh (SEO Image)",
+
+    // Admin CMS User Management
+    "search_user_placeholder" => "Tìm kiếm người dùng qua email hoặc tên",
+    "add_new_user" => "Thêm mới người dùng",
 ];

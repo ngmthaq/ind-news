@@ -8,6 +8,7 @@ class User extends Model
     public const ADMIN = 2;
     public const MALE = 1;
     public const FEMALE = 2;
+    public const OTHER = 3;
 
     public string $id;
     public string $email;
@@ -90,5 +91,27 @@ class User extends Model
     public function isAdmin(): bool
     {
         return $this->role === self::ADMIN;
+    }
+
+    /**
+     * Get role name
+     * 
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return trans($this->isAdmin() ? "admin" : "user");
+    }
+
+    /**
+     * Get gender from enum
+     * 
+     * @return string
+     */
+    public function getGender(): string
+    {
+        if ($this->gender === self::MALE) return trans("male");
+        if ($this->gender === self::FEMALE) return trans("female");
+        return trans("other");
     }
 }

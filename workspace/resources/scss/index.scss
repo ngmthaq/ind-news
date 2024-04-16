@@ -6,6 +6,7 @@
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+  scrollbar-width: thin;
 }
 
 .roboto-thin {
@@ -89,33 +90,5 @@
     right: -12px;
     color: red;
     content: "*";
-  }
-}
-
-h1.cms-title {
-  font-size: 20px;
-  font-weight: 800;
-  padding: 16px 0;
-  margin: 0 24px;
-  margin-bottom: 24px;
-  border-bottom: 1px dashed $gray-400;
-}
-
-section.cms-section {
-  padding: 24px;
-  margin: 0 24px;
-  box-shadow: $box-shadow;
-  border-radius: 4px;
-  margin-bottom: 24px;
-  background-color: $white;
-}
-
-body[data-bs-theme="dark"] {
-  h1.cms-title {
-    border-color: $gray-800;
-  }
-
-  section.cms-section {
-    background-color: $gray-900;
   }
 }
