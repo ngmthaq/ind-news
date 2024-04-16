@@ -22,7 +22,7 @@ class Firebase
     public function __construct()
     {
         $this->factory = new Factory();
-        $this->factory->withServiceAccount($_ENV["FIREBASE_CREDENTIALS_JSON"]);
+        $this->factory->withServiceAccount(ROOT . $_ENV["FIREBASE_CREDENTIALS_JSON"]);
         $this->storage = $this->factory->createStorage();
         $this->firestore = $this->factory->createFirestore();
     }
