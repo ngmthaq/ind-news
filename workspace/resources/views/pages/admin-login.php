@@ -15,7 +15,7 @@
         </div>
         <div class="form-container">
             <h4 class="text-center mb-2"><?php echo trans("login") ?></h4>
-            <p class="text-center mb-3"><?php echo trans("welcome") ?></p>
+            <p class="text-center mb-4"><?php echo trans("welcome") ?></p>
             <div class="mb-3">
                 <label for="email" class="form-label required"><?php echo trans("email_address") ?></label>
                 <input type="text" name="email" id="email" class="form-control" placeholder="name@example.com" value="<?php echo old("email") ?>">

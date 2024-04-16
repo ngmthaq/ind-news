@@ -27,7 +27,7 @@
   & .form-container {
     width: 460px;
     max-width: 100vw;
-    box-shadow: var(--bs-box-shadow);
+    box-shadow: $box-shadow;
     padding: 24px 32px;
     border-radius: 8px;
   }

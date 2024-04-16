@@ -38,6 +38,7 @@ return [
     "cms_ads_management" => "Nội dung quảng cáo",
     "cms_activity_management" => "Hoạt động hệ thống",
     "cms_profile" => "Hồ sơ cá nhân",
+    "cms_setting" => "Cài đặt",
     "title_homepage" => "Trang chủ - Trang thông tin công nghiệp - Industry News",
     "title_category" => ":category - Danh mục - Trang thông tin công nghiệp - Industry News",
     "title_post" => ":post - Bài viết - Trang thông tin công nghiệp - Industry News",

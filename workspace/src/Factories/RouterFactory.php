@@ -9,6 +9,7 @@ use Src\Controllers\AdminDashboardController;
 use Src\Controllers\AdminLogManagementController;
 use Src\Controllers\AdminPostManagementController;
 use Src\Controllers\AdminProfileController;
+use Src\Controllers\AdminSettingController;
 use Src\Controllers\AdminUserManagementController;
 use Src\Controllers\AuthController;
 use Src\Controllers\CategoryController;
@@ -95,6 +96,11 @@ class RouterFactory extends Factory
                 // Admin Profile Page
                 $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
                 return [new AdminProfileController($featureRepo), "index"];
+
+            case "/admin/setting.html";
+                // Admin Setting Page
+                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+                return [new AdminSettingController($featureRepo), "index"];
 
             case "/_/system/phpinfo.html":
                 // PHP Info

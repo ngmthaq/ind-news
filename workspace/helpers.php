@@ -1,5 +1,8 @@
 <?php
 
+use Src\Configs\App;
+use Src\Exceptions\NotFoundException;
+
 /**
  * Debugger
  * 
@@ -213,7 +216,7 @@ function attachment(string $attachmentLocation): string
         ob_end_clean();
         return $buffer;
     } else {
-        throw new Src\Exceptions\NotFoundException("Máy chủ không thể tìm thấy bất kỳ tập tin tương ứng trên hệ thống");
+        throw new NotFoundException("Máy chủ không thể tìm thấy bất kỳ tập tin tương ứng trên hệ thống");
     }
 }
 
@@ -294,9 +297,9 @@ function generateRandomString(int $length = 16): string
  */
 function getLangData(): array
 {
-    $lang = query(Src\Configs\App::LANG_KEY) ?? input(Src\Configs\App::LANG_KEY) ?? Src\Configs\App::LANG_DEFAULT;
+    $lang = input(App::LANG_KEY) ?? query(App::LANG_KEY) ?? $_COOKIE[App::LANG_KEY] ?? App::LANG_DEFAULT;
     $path = ROOT . "/resources/lang/" . $lang . ".php";
-    if (!file_exists($path)) $path = ROOT . "/resources/lang/" . Src\Configs\App::LANG_DEFAULT . ".php";
+    if (!file_exists($path)) $path = ROOT . "/resources/lang/" . App::LANG_DEFAULT . ".php";
     $data = require($path);
     return $data;
 }
