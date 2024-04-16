@@ -102,6 +102,11 @@ class RouterFactory extends Factory
                 $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
                 return [new AdminSettingController($featureRepo), "index"];
 
+            case "/admin/setting/save.html";
+                // Admin Setting Page
+                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+                return [new AdminSettingController($featureRepo), "save"];
+
             case "/_/system/phpinfo.html":
                 // PHP Info
                 return [new SystemController(), "phpinfo"];

@@ -13,4 +13,9 @@ class AdminSettingController extends AdminCmsController
         $features = $this->featureRepo->all();
         echo view("admin-setting.php", compact("seo", "features"));
     }
+
+    public function save()
+    {
+        redirect("/admin/setting.html");
+    }
 }

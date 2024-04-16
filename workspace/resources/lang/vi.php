@@ -25,9 +25,14 @@ return [
     "welcome" => "Hãy nhập email và mật khẩu để đăng nhập",
     "email_address" => "Địa chỉ email",
     "password" => "Mật khẩu",
-    "password_placeholder" => "************",
+    "password_placeholder" => "Nhập mật khẩu của bạn tại đây",
     "cms_title" => "INDUSTRY NEWS ADMIN CMS",
     "logout" => "Đăng xuất",
+    "theme_mode" => "Chế độ hiển thị",
+    "light_mode" => "Chế độ sáng",
+    "dark_mode" => "Chế độ tối",
+    "language" => "Ngôn ngữ",
+    "save" => "Lưu",
 
     // Common document title
     "cms_dashboard" => "Trang tổng quan",
@@ -42,4 +47,11 @@ return [
     "title_homepage" => "Trang chủ - Trang thông tin công nghiệp - Industry News",
     "title_category" => ":category - Danh mục - Trang thông tin công nghiệp - Industry News",
     "title_post" => ":post - Bài viết - Trang thông tin công nghiệp - Industry News",
+
+    // Admin CMS Setting Page
+    "seo_title" => "Tiêu đề trang web (SEO Title)",
+    "seo_description" => "Mô tả trang web (SEO Description)",
+    "seo_keywords" => "Từ khóa của trang web (SEO Keywords)",
+    "seo_url" => "Đường dẫn chính (SEO Main URL)",
+    "seo_image" => "Hình ảnh (SEO Image)",
 ];

@@ -14,6 +14,12 @@ export const getThemeMode = () => {
   return theme;
 };
 
+export const changeThemeMode = (theme) => {
+  const key = "PHPTHEME";
+  CookieJs.set(key, theme);
+  document.body.setAttribute("data-bs-theme", theme);
+};
+
 export const toggleThemeMode = () => {
   const key = "PHPTHEME";
   const theme = getThemeMode();
