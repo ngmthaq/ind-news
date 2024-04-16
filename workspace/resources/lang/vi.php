@@ -22,11 +22,11 @@ return [
     "back_to_homepage" => "Quay lại trang chủ",
     "login" => "Đăng nhập",
     "admin_login" => "Đăng nhập với tư cách quản trị viên",
-    "welcome_back" => "Chào mừng quay trở lại",
+    "welcome" => "Hãy nhập email và mật khẩu để đăng nhập",
     "email_address" => "Địa chỉ email",
     "password" => "Mật khẩu",
-    "password_placeholder" => "Nhập mật khẩu của bạn tại đây",
-    "cms_title" => "INDUSTRY NEWS CMS",
+    "password_placeholder" => "************",
+    "cms_title" => "INDUSTRY NEWS ADMIN CMS",
     "logout" => "Đăng xuất",
 
     // Common document title

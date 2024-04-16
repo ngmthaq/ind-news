@@ -54,7 +54,8 @@ try {
             $trace = $th->getTraceAsString();
             $date = gmdate("Y-m-d", time());
             $time = gmdate("H:i:s", time());
-            $logFile = "./prod.log";
+            $logFile = ROOT . "/resources/cached/error.log";
+            if (!file_exists($logFile)) touch($logFile);
             $info_message = "[$date $time UTC] ERROR: $message\n$trace\n\n";
             error_log($info_message, 3, $logFile);
         }

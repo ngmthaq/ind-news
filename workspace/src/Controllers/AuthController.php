@@ -28,7 +28,7 @@ class AuthController extends Controller
     {
         $callbackUrl = input("callbackUrl");
         Auth::logout();
-        redirect($callbackUrl ?? "/");
+        redirect($callbackUrl !== "" ? $callbackUrl : "/");
     }
 
     /**
@@ -43,7 +43,7 @@ class AuthController extends Controller
         $password = input("password");
         $callbackUrl = input("callbackUrl");
         $errors = $this->attempt($email, $password);
-        if (count($errors) === 0) redirect($callbackUrl ?? "/admin/dashboard.html");
+        if (count($errors) === 0) redirect($callbackUrl !== "" ? $callbackUrl : "/admin/dashboard.html");
         flashFromArray($errors);
         redirect("/admin/login.html");
     }

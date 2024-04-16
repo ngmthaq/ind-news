@@ -13,7 +13,7 @@ function debug(): void
         echo "<pre>";
         foreach ($argv as $arg) {
             print_r($arg);
-            echo "\n===============";
+            echo "\n===============\n";
         }
         echo "<pre/>";
         die();
@@ -48,7 +48,7 @@ function minify(string $buffer): string
  */
 function isProd(): bool
 {
-    return file_exists(ROOT . "/prod.log");
+    return $_ENV["APP_ENV"] === "production";
 }
 
 /**
@@ -134,7 +134,7 @@ function reload(): void
 function redirect(string $path, array $queries = []): void
 {
     $url = route($path, $queries);
-    header("Location: $url");
+    header("Location: $url", true, 302);
     exit();
 }
 

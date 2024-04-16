@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { getThemeMode, toggleThemeMode } from "./helpers";
 import "../scss/adminLogin.scss";
 
 $(function () {
@@ -14,5 +15,11 @@ $(function () {
       $(this).html(`<i class="${hideIcon}"></i>`);
     }
     $(this).data("show", !isShowPassword);
+  });
+
+  $("#switch-theme").attr("checked", getThemeMode() === "dark");
+
+  $("#switch-theme").on("change", function () {
+    toggleThemeMode();
   });
 });

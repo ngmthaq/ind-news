@@ -54,6 +54,8 @@ services:
       - database
       - dbms
       - cache
+    environment:
+      - WATCHPACK_POLLING=true
 volumes:
   storage:
 networks:

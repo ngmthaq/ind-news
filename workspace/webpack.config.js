@@ -55,7 +55,7 @@ function getRules(mode) {
 }
 
 const configs = {
-  devtool: "inline-source-map",
+  devtool: "eval",
   entry: {
     index: "./resources/js/index.js",
     adminLogin: "./resources/js/adminLogin.js",
@@ -70,6 +70,15 @@ const configs = {
     rules: getRules("development"),
   },
   plugins: [new CleanWebpackPlugin()],
+  devServer: {
+    port: 80,
+    host: "0.0.0.0",
+    compress: false,
+    watchOptions: {
+      aggregateTimeout: 500,
+      poll: 1000,
+    },
+  },
 };
 
 module.exports = (env, argv) => {

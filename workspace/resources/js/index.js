@@ -1,9 +1,10 @@
 import $ from "jquery";
 import CookieJs from "js-cookie";
+import { getThemeMode } from "./helpers";
 import "../scss/index.scss";
 
 (async () => {
-  const key = "PHPASBC";
+  const key = "PHPTOGGLESIDEBAR";
   const isOpenSidebar = Boolean(CookieJs.get(key));
   const hideIcon = $("#sidebar-toggle-width-button").data("hide-icon");
   const showIcon = $("#sidebar-toggle-width-button").data("show-icon");
@@ -35,4 +36,9 @@ import "../scss/index.scss";
       ? $(".admin-sidebar").addClass("minimize")
       : $(".admin-sidebar").removeClass("minimize");
   });
+})();
+
+(() => {
+  const theme = getThemeMode();
+  document.body.setAttribute("data-bs-theme", theme);
 })();

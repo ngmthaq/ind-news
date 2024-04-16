@@ -11,11 +11,11 @@
         <input type="hidden" name="callbackUrl" value="<?php echo query("callbackUrl") ?>">
         <div class="logo-container">
             <img src="<?php echo assets("/images/logo-transparent.png") ?>" alt="Logo">
+            <h5 class="text-center"><?php echo trans("cms_title") ?></h5>
         </div>
         <div class="form-container">
-            <div class="mb-4">
-                <h2 class="text-center"><?php echo trans("cms_title") ?></h2>
-            </div>
+            <h4 class="text-center mb-2"><?php echo trans("login") ?></h4>
+            <p class="text-center mb-3"><?php echo trans("welcome") ?></p>
             <div class="mb-3">
                 <label for="email" class="form-label required"><?php echo trans("email_address") ?></label>
                 <input type="text" name="email" id="email" class="form-control" placeholder="name@example.com" value="<?php echo old("email") ?>">
@@ -31,9 +31,19 @@
                 </div>
                 <small class="text-danger"><?php echo flash("password") ?></small>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <button name="login" type="submit" class="btn btn-primary w-100"><?php echo trans("login") ?></button>
             </div>
+        </div>
+        <div class="d-flex align-items-center gap-1 my-4">
+            <i class="bi bi-sun-fill"></i>
+            <div class="form-check form-switch" style="padding-left: 2.7rem">
+                <input class="form-check-input" type="checkbox" role="switch" id="switch-theme" />
+            </div>
+            <i class="bi bi-moon-fill" style="font-size: 11px;"></i>
+        </div>
+        <div class="text-center">
+            <small>Copyright @ngmthaq ©️ 2024 - <?php echo date("Y") ?></small>
         </div>
     </form>
 
