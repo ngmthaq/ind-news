@@ -7,7 +7,7 @@ use Src\Configs\Database;
 
 class Auth extends User
 {
-    public const AUTH_KEY = "PHPAUTHID";
+    public const AUTH_KEY = "PHPAUTHTOKEN";
 
     /**
      * Handle verify user login

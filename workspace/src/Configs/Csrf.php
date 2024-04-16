@@ -19,7 +19,7 @@ class Csrf
     public static function init(): void
     {
         if (empty($_SESSION[self::TOKEN_KEY])) {
-            $_SESSION[self::TOKEN_KEY] = generateRandomString();
+            $_SESSION[self::TOKEN_KEY] = generateRandomString(128);
         }
     }
 

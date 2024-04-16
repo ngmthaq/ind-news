@@ -1,7 +1,7 @@
 import CookieJs from "js-cookie";
 
 export const trans = (key, replace = {}) => {
-  let translation = window.__langData[key] || "";
+  let translation = window.__lang_data[key] || "";
   for (let placeholder in replace) {
     translation = translation.replace(`:${placeholder}`, replace[placeholder]);
   }
@@ -22,4 +22,8 @@ export const toggleThemeMode = () => {
     "data-bs-theme",
     theme === "light" ? "dark" : "light"
   );
+};
+
+export const getXSRFToken = () => {
+  return { key: window.__x_csrf_key, value: window.__x_csrf_token };
 };
