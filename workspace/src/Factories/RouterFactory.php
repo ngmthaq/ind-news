@@ -37,7 +37,7 @@ class RouterFactory extends Factory
      */
     public function resolve(string $key): array
     {
-        list($method, $path) = explode(":", $key);
+        list($method, $path) = json_decode($key, true);
         return $this->resolveNormalRoute($path, $method);
     }
 

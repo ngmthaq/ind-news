@@ -234,8 +234,9 @@ function execute(): void
 {
     $method = strtoupper($_SERVER["REQUEST_METHOD"]);
     $url = str_replace("/public", "", $_SERVER["REDIRECT_URL"]);
+    $key = json_encode([$method, $url]);
     $routerFactory = new RouterFactory();
-    list($controller, $action, $argv) = $routerFactory->resolve($method . ":" . $url);
+    list($controller, $action, $argv) = $routerFactory->resolve($key);
     $argv = $argv ?? [];
     call_user_func_array([$controller, $action], $argv);
 }
