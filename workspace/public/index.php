@@ -48,19 +48,16 @@ try {
     if ($th instanceof \Src\Exceptions\Exception) {
         echo error($th->getMessage(), $th->getDetails(), $th->getCode());
     } else {
-        $isProd = isProd();
-        if ($isProd) {
-            $message = $th->getMessage();
-            $trace = $th->getTraceAsString();
-            $date = gmdate("Y-m-d", time());
-            $time = gmdate("H:i:s", time());
-            $logFile = ROOT . "/resources/cached/error.log";
-            if (!file_exists($logFile)) touch($logFile);
-            $info_message = "[$date $time UTC] ERROR: $message\n$trace\n\n";
-            error_log($info_message, 3, $logFile);
-        }
+        $message = $th->getMessage();
+        $trace = $th->getTraceAsString();
+        $date = gmdate("Y-m-d", time());
+        $time = gmdate("H:i:s", time());
+        $logFile = ROOT . "/resources/cached/error.log";
+        if (!file_exists($logFile)) touch($logFile);
+        $infoMessage = "[$date $time UTC] ERROR: $message\n$trace\n\n";
+        error_log($infoMessage, 3, $logFile);
         echo error(
-            $isProd ? trans("error_500") : $th->getMessage(),
+            $isProd ? trans("error_500") : $message,
             $isProd ? [] : $th->getTrace(),
             500
         );

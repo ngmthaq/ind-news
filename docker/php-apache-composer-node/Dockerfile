@@ -12,9 +12,11 @@ RUN apt-get upgrade -y
 
 RUN apt-get install git libzip-dev zip unzip vim g++ autoconf zlib1g-dev -y
 
-RUN pecl install grpc
+RUN pecl install grpc && docker-php-ext-enable grpc
 
-RUN pecl install protobuf
+RUN pecl install protobuf && docker-php-ext-enable protobuf
+
+RUN pecl install redis && docker-php-ext-enable redis
 
 RUN docker-php-ext-install zip && docker-php-ext-enable zip
 
@@ -23,10 +25,6 @@ RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN docker-php-ext-install pdo && docker-php-ext-enable pdo
 
 RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
-
-RUN docker-php-ext-enable grpc
-
-RUN docker-php-ext-enable protobuf
 
 COPY php.ini $PHP_INI_DIR/php.ini
 

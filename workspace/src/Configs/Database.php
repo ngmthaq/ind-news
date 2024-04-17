@@ -55,7 +55,15 @@ class Database
      */
     public function exec(): PDOStatement
     {
-        $stm = $this->pdo->prepare($this->sql);
+        $sql = $this->sql;
+        $date = gmdate("Y-m-d", time());
+        $time = gmdate("H:i:s", time());
+        $logFile = ROOT . "/resources/cached/db.log";
+        if (!file_exists($logFile)) touch($logFile);
+        $params = json_encode($this->params);
+        $infoMessage = "[$date $time UTC] QUERY: \"$sql\". PARAMS: $params\n";
+        error_log($infoMessage, 3, $logFile);
+        $stm = $this->pdo->prepare($sql);
         $stm->setFetchMode(PDO::FETCH_ASSOC);
         $stm->execute($this->params);
         $this->sql = "";
@@ -70,6 +78,14 @@ class Database
      */
     public function lastInsertId(): bool|string
     {
+        $sql = "LAST INSERT ID";
+        $date = gmdate("Y-m-d", time());
+        $time = gmdate("H:i:s", time());
+        $logFile = ROOT . "/resources/cached/db.log";
+        if (!file_exists($logFile)) touch($logFile);
+        $params = json_encode([]);
+        $infoMessage = "[$date $time UTC] QUERY: \"$sql\". PARAMS: $params\n";
+        error_log($infoMessage, 3, $logFile);
         return $this->pdo->lastInsertId();
     }
 
@@ -80,6 +96,14 @@ class Database
      */
     public function beginTransaction(): void
     {
+        $sql = "BEGIN TRANSACTION";
+        $date = gmdate("Y-m-d", time());
+        $time = gmdate("H:i:s", time());
+        $logFile = ROOT . "/resources/cached/db.log";
+        if (!file_exists($logFile)) touch($logFile);
+        $params = json_encode([]);
+        $infoMessage = "[$date $time UTC] QUERY: \"$sql\". PARAMS: $params\n";
+        error_log($infoMessage, 3, $logFile);
         $this->pdo->beginTransaction();
     }
 
@@ -90,6 +114,14 @@ class Database
      */
     public function commitTransaction(): void
     {
+        $sql = "COMMIT TRANSACTION";
+        $date = gmdate("Y-m-d", time());
+        $time = gmdate("H:i:s", time());
+        $logFile = ROOT . "/resources/cached/db.log";
+        if (!file_exists($logFile)) touch($logFile);
+        $params = json_encode([]);
+        $infoMessage = "[$date $time UTC] QUERY: \"$sql\". PARAMS: $params\n";
+        error_log($infoMessage, 3, $logFile);
         $this->pdo->commit();
     }
 
@@ -100,6 +132,14 @@ class Database
      */
     public function rollBackTransaction(): void
     {
+        $sql = "ROLLBACK TRANSACTION";
+        $date = gmdate("Y-m-d", time());
+        $time = gmdate("H:i:s", time());
+        $logFile = ROOT . "/resources/cached/db.log";
+        if (!file_exists($logFile)) touch($logFile);
+        $params = json_encode([]);
+        $infoMessage = "[$date $time UTC] QUERY: \"$sql\". PARAMS: $params\n";
+        error_log($infoMessage, 3, $logFile);
         $this->pdo->rollBack();
     }
 }

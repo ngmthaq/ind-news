@@ -7,6 +7,7 @@ return [
     "error_403" => "Bạn không được cấp quyền để thực hiện hành động này",
     "error_404" => "Chúng tôi không thể tìm thấy trang bạn đang tìm kiếm",
     "error_422" => "Dữ liệu gửi lên không đúng định dạng",
+    "error_429" => "Bạn đã gửi quá nhiều yêu cầu truy cập cùng một lúc, vui lòng quay lại sau ít phút",
     "error_500" => "Máy chủ đã xảy ra lỗi, vui lòng thử lại sau",
     "error_503" => "Máy chủ đang trong quá trình bảo trì, vui lòng quay lại sau ít phút",
     "error_repository_factory" => "Đã xảy ra lỗi khi chạy Repository",

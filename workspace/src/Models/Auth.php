@@ -20,7 +20,7 @@ class Auth extends User
     {
         $db = new Database();
         $time = time() + 60 * 60 * 24 * 30; // 30 days
-        $sql = "SELECT * FROM users WHERE email = ? AND password = ? AND deleted_at IS NULL";
+        $sql = "SELECT * FROM users WHERE email = ? AND password = ? AND deleted_at IS NULL LIMIT 1 OFFSET 0";
         $params = [$email, md5($password)];
         $stm = $db->setSql($sql)->setParams($params)->exec();
         $data = $stm->fetch();
@@ -49,7 +49,7 @@ class Auth extends User
             if (empty($password)) return null;
             if (empty($updatedAt)) return null;
             $db = new Database();
-            $sql = "SELECT * FROM users WHERE email = ? AND password = ? AND deleted_at IS NULL";
+            $sql = "SELECT * FROM users WHERE email = ? AND password = ? AND deleted_at IS NULL LIMIT 1 OFFSET 0";
             $params = [$email, $password];
             $stm = $db->setSql($sql)->setParams($params)->exec();
             $data = $stm->fetch();
