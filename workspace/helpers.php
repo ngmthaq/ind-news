@@ -2,6 +2,7 @@
 
 use eftec\bladeone\BladeOne;
 use Src\Configs\App;
+use Src\Configs\Csrf;
 use Src\Exceptions\NotFoundException;
 use Src\Factories\RouterFactory;
 
@@ -231,9 +232,10 @@ function assets(string $path): string
  */
 function execute(): void
 {
+    $method = strtoupper($_SERVER["REQUEST_METHOD"]);
     $url = str_replace("/public", "", $_SERVER["REDIRECT_URL"]);
     $routerFactory = new RouterFactory();
-    list($controller, $action, $argv) = $routerFactory->resolve($url);
+    list($controller, $action, $argv) = $routerFactory->resolve($method . ":" . $url);
     $argv = $argv ?? [];
     call_user_func_array([$controller, $action], $argv);
 }
@@ -516,4 +518,14 @@ function convertStringToSlug(string $string, string $symbol = '-'): string
 function getCurrentUrl(): string
 {
     return str_replace("/public", "", $_SERVER["REDIRECT_URL"]);
+}
+
+/**
+ * Get X-CSRF input
+ * 
+ * @return string
+ */
+function csrfInput(): string
+{
+    return Csrf::input();
 }

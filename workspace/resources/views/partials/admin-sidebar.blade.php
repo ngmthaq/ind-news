@@ -12,7 +12,7 @@
             </a>
         @endforeach
         <form action="/logout.html" method="post">
-            {!! Src\Configs\Csrf::input() !!}
+            {!! csrfInput() !!}
             <input type="hidden" name="callbackUrl" value="/admin/login.html">
             <button type="submit" class="admin-sidebar-list-item" title="{{ trans('logout') }}">
                 <i class="bi bi-box-arrow-right"></i>

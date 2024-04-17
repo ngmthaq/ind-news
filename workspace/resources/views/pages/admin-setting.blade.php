@@ -1,7 +1,8 @@
 @extends('layouts.cms')
 
 @section('content')
-    <form id="setting-form" action="/admin/setting/save.html" method="post">
+    <form id="setting-form" method="post">
+        {!! csrfInput() !!}
         <div class="row">
             <div class="mb-4 col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
                 <label for="theme-mode" class="form-label required">{{ trans('theme_mode') }}</label>

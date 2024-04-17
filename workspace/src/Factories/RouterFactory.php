@@ -37,107 +37,134 @@ class RouterFactory extends Factory
      */
     public function resolve(string $key): array
     {
-        switch ($key) {
-            case "/":
-                // Default Page = Home Page
-                return [new HomeController(), "index"];
+        list($method, $path) = explode(":", $key);
+        return $this->resolveNormalRoute($path, $method);
+    }
 
-            case "/index.html":
-                // Home Page
-                return [new HomeController(), "index"];
-
-            case "/logout.html";
-                // Logout
-                return [new AuthController(), "logout"];
-
-            case "/admin/login.html";
-                // Login Page
-                return [new AuthController(), "login"];
-
-            case "/admin/attempt.html";
-                // Attempt Login Form
-                return [new AuthController(), "verifyLoginForm"];
-
-            case "/admin/dashboard.html";
-                // Admin Dashboard Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminDashboardController($featureRepo), "index"];
-
-            case "/admin/mng/users.html";
-                // Admin User Management Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                $userRepo = $this->repoFactory->resolve(UserRepoInterface::class);
-                return [new AdminUserManagementController($featureRepo, $userRepo), "index"];
-
-            case "/admin/mng/categories.html";
-                // Admin Category Management Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminCategoryManagementController($featureRepo), "index"];
-
-            case "/admin/mng/posts.html";
-                // Admin Post Management Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminPostManagementController($featureRepo), "index"];
-
-            case "/admin/mng/attachments.html";
-                // Admin Attachment Management Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminAttachmentManagementController($featureRepo), "index"];
-
-            case "/admin/mng/ads.html";
-                // Admin ADS Management Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminAdManagementController($featureRepo), "index"];
-
-            case "/admin/mng/activities.html";
-                // Admin Activity Management Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminLogManagementController($featureRepo), "index"];
-
-            case "/admin/profile.html";
-                // Admin Profile Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminProfileController($featureRepo), "index"];
-
-            case "/admin/setting.html";
-                // Admin Setting Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminSettingController($featureRepo), "index"];
-
-            case "/admin/setting/save.html";
-                // Admin Setting Page
-                $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminSettingController($featureRepo), "save"];
-
-            case "/_/system/phpinfo.html":
-                // PHP Info
-                return [new SystemController(), "phpinfo"];
-
-            default:
-                // Resolve Dynamic Route or 404 Not Found
-                return $this->resolveDynamicRoute($key);
+    /**
+     * Resolve route with controller and action
+     * 
+     * @param string $path
+     * @param string $method
+     * @return array
+     */
+    protected function resolveNormalRoute(string $path, string $method)
+    {
+        // Default Page = Home Page
+        if ($method === "GET" && $path === "/") {
+            return [new HomeController(), "index"];
         }
+
+        // Home Page
+        if ($method === "GET" && $path === "/index.html") {
+            return [new HomeController(), "index"];
+        }
+
+        // Login Page
+        if ($method === "GET" && $path === "/admin/login.html") {
+            return [new AuthController(), "login"];
+        }
+
+        // Admin Dashboard Page
+        if ($method === "GET" && $path === "/admin/dashboard.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminDashboardController($featureRepo), "index"];
+        }
+
+        // Admin User Management Page
+        if ($method === "GET" && $path === "/admin/mng/users.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            $userRepo = $this->repoFactory->resolve(UserRepoInterface::class);
+            return [new AdminUserManagementController($featureRepo, $userRepo), "index"];
+        }
+
+        // Admin Category Management Page
+        if ($method === "GET" && $path === "/admin/mng/categories.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminCategoryManagementController($featureRepo), "index"];
+        }
+
+        // Admin Post Management Page
+        if ($method === "GET" && $path === "/admin/mng/posts.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminPostManagementController($featureRepo), "index"];
+        }
+
+        // Admin Attachment Management Page
+        if ($method === "GET" && $path === "/admin/mng/attachments.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminAttachmentManagementController($featureRepo), "index"];
+        }
+
+        // Admin ADS Management Page
+        if ($method === "GET" && $path === "/admin/mng/ads.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminAdManagementController($featureRepo), "index"];
+        }
+
+        // Admin Activity Management Page
+        if ($method === "GET" && $path === "/admin/mng/activities.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminLogManagementController($featureRepo), "index"];
+        }
+
+        // Admin Profile Page
+        if ($method === "GET" && $path === "/admin/profile.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminProfileController($featureRepo), "index"];
+        }
+
+        // Admin Setting Page
+        if ($method === "GET" && $path === "/admin/setting.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminSettingController($featureRepo), "index"];
+        }
+
+        // PHP Info
+        if ($method === "GET" && $path === "/_/system/phpinfo.html") {
+            return [new SystemController(), "phpinfo"];
+        }
+
+        // Attempt Login Form
+        if ($method === "POST" && $path === "/admin/login.html") {
+            return [new AuthController(), "verifyLoginForm"];
+        }
+
+        // Logout
+        if ($method === "POST" && $path === "/logout.html") {
+            return [new AuthController(), "logout"];
+        }
+
+        // Admin Setting Page
+        if ($method === "POST" && $path === "/admin/setting.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            return [new AdminSettingController($featureRepo), "save"];
+        }
+
+        // Resolve Dynamic Route or 404 Not Found
+        return $this->resolveDynamicRoute($path, $method);
     }
 
     /**
      * Resolve dynamic route with controller and action
      * 
-     * @param string $key
+     * @param string $path
+     * @param string $method
      * @return array
      */
-    protected function resolveDynamicRoute(string $key): array
+    protected function resolveDynamicRoute(string $path, string $method): array
     {
         // Dynamic Category Page
-        if (preg_match("/^\/categories\/[a-zA-Z0-9-]+.html$/", $key)) {
-            $slug = str_replace("/categories/", "", $key);
+        if ($method === "GET" && preg_match("/^\/categories\/[a-zA-Z0-9-]+.html$/", $path)) {
+            $slug = str_replace("/categories/", "", $path);
             $slug = str_replace(".html", "", $slug);
             $slug = htmlentities($slug);
             return [new CategoryController(), "index", [$slug]];
         }
 
         // Dynamic Post Page
-        if (preg_match("/^\/posts\/[a-zA-Z0-9-]+.html$/", $key)) {
-            $slug = str_replace("/posts/", "", $key);
+        if ($method === "GET" && preg_match("/^\/posts\/[a-zA-Z0-9-]+.html$/", $path)) {
+            $slug = str_replace("/posts/", "", $path);
             $slug = str_replace(".html", "", $slug);
             $slug = htmlentities($slug);
             return [new PostController(), "index", [$slug]];

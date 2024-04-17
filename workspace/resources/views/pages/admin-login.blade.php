@@ -1,8 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
-    <form action="/admin/attempt.html" method="post" class="login-form">
-        {!! Src\Configs\Csrf::input() !!}
+    <form method="post" class="login-form">
+        {!! csrfInput() !!}
         <input type="hidden" name="callbackUrl" value="{{ query('callbackUrl') }}">
         <div class="logo-container">
             <img src="{{ assets('/images/logo-transparent.png') }}" alt="Logo">
