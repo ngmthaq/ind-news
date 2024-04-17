@@ -18,6 +18,7 @@ use Src\Controllers\PostController;
 use Src\Controllers\SystemController;
 use Src\Exceptions\NotFoundException;
 use Src\Repos\FeatureRepoInterface;
+use Src\Repos\UserRepoInterface;
 
 class RouterFactory extends Factory
 {
@@ -65,7 +66,8 @@ class RouterFactory extends Factory
             case "/admin/mng/users.html";
                 // Admin User Management Page
                 $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
-                return [new AdminUserManagementController($featureRepo), "index"];
+                $userRepo = $this->repoFactory->resolve(UserRepoInterface::class);
+                return [new AdminUserManagementController($featureRepo, $userRepo), "index"];
 
             case "/admin/mng/categories.html";
                 // Admin Category Management Page

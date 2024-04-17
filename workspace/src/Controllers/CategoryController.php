@@ -10,6 +10,6 @@ class CategoryController extends Controller
     {
         $name = $slug;
         $seo = new Seo(trans("title_category"), "", "", "", "");
-        echo view("category.php", compact("name",  "seo"));
+        echo view("pages.category", compact("name",  "seo"));
     }
 }

@@ -11,6 +11,6 @@ class AdminCategoryManagementController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_category_management"), "", "", "", "");
         $features = $this->featureRepo->all();
-        echo view("admin-category-management.php", compact("seo", "features"));
+        echo view("pages.admin-category-management", compact("seo", "features"));
     }
 }

@@ -11,6 +11,6 @@ class AdminAdManagementController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_ads_management"), "", "", "", "");
         $features = $this->featureRepo->all();
-        echo view("admin-ad-management.php", compact("seo", "features"));
+        echo view("pages.admin-ad-management", compact("seo", "features"));
     }
 }

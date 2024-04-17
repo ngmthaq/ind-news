@@ -16,18 +16,13 @@ export const getThemeMode = () => {
 
 export const changeThemeMode = (theme) => {
   const key = "PHPTHEME";
-  CookieJs.set(key, theme);
+  CookieJs.set(key, theme, { expires: 30 });
   document.body.setAttribute("data-bs-theme", theme);
 };
 
 export const toggleThemeMode = () => {
-  const key = "PHPTHEME";
   const theme = getThemeMode();
-  CookieJs.set(key, theme === "light" ? "dark" : "light");
-  document.body.setAttribute(
-    "data-bs-theme",
-    theme === "light" ? "dark" : "light"
-  );
+  changeThemeMode(theme === "light" ? "dark" : "light");
 };
 
 export const getXSRFToken = () => {

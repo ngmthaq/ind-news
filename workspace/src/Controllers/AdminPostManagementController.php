@@ -11,6 +11,6 @@ class AdminPostManagementController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_post_management"), "", "", "", "");
         $features = $this->featureRepo->all();
-        echo view("admin-post-management.php", compact("seo", "features"));
+        echo view("pages.admin-post-management", compact("seo", "features"));
     }
 }

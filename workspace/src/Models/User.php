@@ -114,4 +114,14 @@ class User extends Model
         if ($this->gender === self::FEMALE) return trans("female");
         return trans("other");
     }
+
+    /**
+     * Check active status
+     * 
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->deletedAt === null;
+    }
 }

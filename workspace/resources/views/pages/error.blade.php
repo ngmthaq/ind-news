@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $message ?></title>
+    <title>{{ $message }}</title>
     <style>
         * {
             padding: 0;
@@ -49,19 +49,19 @@
 
 <body>
     <div>
-        <h1><?php echo $code ?></h1>
-        <p><?php echo $message ?></p>
-        <?php if ($code !== 503) : ?>
-            <a href="/"><?php echo trans("back_to_homepage") ?></a>
-        <?php endif ?>
+        <h1>{{ $code }}</h1>
+        <p>{{ $message }}</p>
+        @if ($code !== 503)
+            <a href="/">{{ trans('back_to_homepage') }}</a>
+        @endif
     </div>
 
-    <?php if (isProd() === false) : ?>
+    @if (isProd() === false)
         <script>
-            console.error("Error: <?php echo $message ?> (<?php echo $code ?>)");
-            console.error(<?php echo json_encode($details) ?>);
+            console.error("Error: {{ $message }} ({{ $code }})");
+            console.error(JSON.parse("{{ json_encode($details) }}"));
         </script>
-    <?php endif ?>
+    @endif
 </body>
 
 </html>

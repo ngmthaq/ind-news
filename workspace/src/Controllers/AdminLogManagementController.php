@@ -11,6 +11,6 @@ class AdminLogManagementController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_activity_management"), "", "", "", "");
         $features = $this->featureRepo->all();
-        echo view("admin-log-management.php", compact("seo", "features"));
+        echo view("pages.admin-log-management", compact("seo", "features"));
     }
 }

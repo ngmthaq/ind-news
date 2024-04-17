@@ -152,10 +152,17 @@ body {
 
           & table {
             min-width: 1200px;
+            table-layout: fixed;
 
             & thead th {
               position: sticky;
               top: -1px;
+            }
+
+            & tbody td {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
         }

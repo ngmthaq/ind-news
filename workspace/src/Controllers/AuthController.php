@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
         if (Auth::check()) redirect("/admin/dashboard.html");
         $seo = new Seo(trans("admin_login"), "", "", "", "");
-        echo view("/admin-login.php", compact("seo"));
+        echo view("pages.admin-login", compact("seo"));
     }
 
     /**

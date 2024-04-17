@@ -11,6 +11,6 @@ class AdminDashboardController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_dashboard"), "", "", "", "");
         $features = $this->featureRepo->all();
-        echo view("admin-dashboard.php", compact("seo", "features"));
+        echo view("pages.admin-dashboard", compact("seo", "features"));
     }
 }

@@ -11,6 +11,6 @@ class AdminAttachmentManagementController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_attachment_management"), "", "", "", "");
         $features = $this->featureRepo->all();
-        echo view("admin-attachment-management.php", compact("seo", "features"));
+        echo view("pages.admin-attachment-management", compact("seo", "features"));
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
+use eftec\bladeone\BladeOne;
 use Src\Configs\App;
 use Src\Exceptions\NotFoundException;
+use Src\Factories\RouterFactory;
 
 /**
  * Debugger
@@ -164,34 +166,23 @@ function json(array $data, array $headers = []): string
 /**
  * HTML Response
  * 
- * @param string $_path
- * @param array $_data
+ * @param string $path
+ * @param array $data
  * @return string
  */
-function view(string $_path, array $_data = []): string
+function view(string $path, array $data = []): string
 {
     ob_end_clean();
     ob_start();
     http_response_code(200);
     header("Content-Type: text/html; charset=utf-8");
-    extract($_data);
-    require_once(ROOT . "/resources/views/pages/" . $_path);
+    $viewPath = ROOT . "/resources/views";
+    $cachedPath = ROOT . "/resources/cached";
+    $blade =  new BladeOne($viewPath, $cachedPath, BladeOne::MODE_DEBUG);
+    echo $blade->run($path, $data);
     $_html = ob_get_contents();
     ob_end_clean();
     return minify($_html);
-}
-
-/**
- * Import partial component
- * 
- * @param string $_path
- * @param array $_data
- * @return string
- */
-function partial(string $_path, array $_data = []): void
-{
-    extract($_data);
-    require(ROOT . "/resources/views/partials/" . $_path);
 }
 
 /**
@@ -240,7 +231,7 @@ function assets(string $path): string
 function execute(): void
 {
     $url = str_replace("/public", "", $_SERVER["REDIRECT_URL"]);
-    $routerFactory = new Src\Factories\RouterFactory();
+    $routerFactory = new RouterFactory();
     list($controller, $action, $argv) = $routerFactory->resolve($url);
     $argv = $argv ?? [];
     call_user_func_array([$controller, $action], $argv);
@@ -266,7 +257,7 @@ function error(string $message, array $details, int $code): string
         echo json_encode(compact("code", "message", "details"));
     } else {
         header("Content-Type: text/html; charset=utf-8");
-        require_once(ROOT . "/resources/views/pages/error.php");
+        echo view("pages.error", compact("code", "message", "details"));
     }
     $output = ob_get_contents();
     ob_end_clean();
@@ -291,17 +282,41 @@ function generateRandomString(int $length = 16): string
 }
 
 /**
+ * Get lang code
+ * 
+ * @return string
+ */
+function getLangCode(): string
+{
+    return input(App::LANG_KEY) ?? query(App::LANG_KEY) ?? $_COOKIE[App::LANG_KEY] ?? App::LANG_DEFAULT;
+}
+
+/**
  * Get lang data
  * 
  * @return array
  */
 function getLangData(): array
 {
-    $lang = input(App::LANG_KEY) ?? query(App::LANG_KEY) ?? $_COOKIE[App::LANG_KEY] ?? App::LANG_DEFAULT;
+    $lang = getLangCode();
     $path = ROOT . "/resources/lang/" . $lang . ".php";
     if (!file_exists($path)) $path = ROOT . "/resources/lang/" . App::LANG_DEFAULT . ".php";
     $data = require($path);
     return $data;
+}
+
+/**
+ * Get lang data in json format
+ * 
+ * @return string
+ */
+function getLangJsonData(): string
+{
+    $lang = input(App::LANG_KEY) ?? query(App::LANG_KEY) ?? $_COOKIE[App::LANG_KEY] ?? App::LANG_DEFAULT;
+    $path = ROOT . "/resources/lang/" . $lang . ".php";
+    if (!file_exists($path)) $path = ROOT . "/resources/lang/" . App::LANG_DEFAULT . ".php";
+    $data = require($path);
+    return json_encode($data);
 }
 
 /**

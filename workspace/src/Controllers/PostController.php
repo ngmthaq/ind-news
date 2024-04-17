@@ -10,6 +10,6 @@ class PostController extends Controller
     {
         $name = $slug;
         $seo = new Seo(trans("title_post"), "", "", "", "");
-        echo view("post.php", compact("name",  "seo"));
+        echo view("pages.post", compact("name",  "seo"));
     }
 }

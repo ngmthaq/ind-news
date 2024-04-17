@@ -10,6 +10,6 @@ class HomeController extends Controller
     {
         $name = "Thang";
         $seo = new Seo(trans("title_homepage"), "", "", "", "");
-        echo view("home.php", compact("name",  "seo"));
+        echo view("pages.home", compact("name",  "seo"));
     }
 }
