@@ -180,9 +180,9 @@ function view(string $path, array $data = []): string
     $cachedPath = ROOT . "/resources/cached";
     $blade = new BladeOne($viewPath, $cachedPath, isProd() ? BladeOne::MODE_FAST : BladeOne::MODE_AUTO);
     echo $blade->run($path, $data);
-    $_html = ob_get_contents();
+    $html = ob_get_contents();
     ob_end_clean();
-    return minify($_html);
+    return minify($html);
 }
 
 /**
