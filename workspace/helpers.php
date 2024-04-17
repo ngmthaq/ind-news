@@ -178,7 +178,8 @@ function view(string $path, array $data = []): string
     header("Content-Type: text/html; charset=utf-8");
     $viewPath = ROOT . "/resources/views";
     $cachedPath = ROOT . "/resources/cached";
-    $blade = new BladeOne($viewPath, $cachedPath, isProd() ? BladeOne::MODE_FAST : BladeOne::MODE_AUTO);
+    $blade = new BladeOne($viewPath, $cachedPath, isProd() ? BladeOne::MODE_AUTO : BladeOne::MODE_DEBUG);
+    $blade->pipeEnable = true;
     echo $blade->run($path, $data);
     $html = ob_get_contents();
     ob_end_clean();
