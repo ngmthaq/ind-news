@@ -14,7 +14,7 @@
                 <div class="d-flex align-items-center justify-content-between gap-2 mb-4">
                     <form class="input-group" style="max-width: 500px" title="<?php echo trans("search_user_placeholder") ?>">
                         <input type="text" class="form-control" id="search-input" placeholder="<?php echo trans("search_user_placeholder") ?>">
-                        <button class="input-group-text btn btn-primary" id="basic-addon1">
+                        <button class="input-group-text btn btn-primary" type="submit">
                             <i class="bi bi-search"></i>
                         </button>
                     </form>
@@ -23,7 +23,7 @@
                         <?php echo trans("add_new_user") ?>
                     </button>
                 </div>
-                <div class="table-sticky-container" style="max-height: 600px">
+                <div class="table-sticky-container" style="height: 600px">
                     <table class="table">
                         <thead>
                             <tr>
@@ -98,6 +98,52 @@
                         </tbody>
                     </table>
                 </div>
+                <?php if (isset($users) && count($users) > 0) : ?>
+                    <div class="d-flex align-items-center justify-content-between gap-2  mt-3">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link disabled" href="#" aria-label="Previous">
+                                        <i class="bi bi-chevron-bar-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link disabled" href="#" aria-label="Previous">
+                                        <i class="bi bi-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link active" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="bi bi-chevron-right"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="bi bi-chevron-bar-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div>
+                            <small>
+                                <?php echo trans("pagination_desc", [
+                                    "from" => 1,
+                                    "to" => 10,
+                                    "total" => 100
+                                ]) ?>
+                            </small>
+                        </div>
+                    </div>
+                <?php endif ?>
             </section>
         </div>
     </div>

@@ -46,6 +46,7 @@ return [
     "female" => "Nữ",
     "other" => "Khác",
     "toggle_sidebar_tooltip" => "Nhấn Ctrl+B để chuyển đổi đóng/mở thanh sidebar",
+    "pagination_desc" => "Hiển thị giá trị từ {{from}} đến {{to}} trên tổng số {{total}}",
 
     // Common document title
     "cms_dashboard" => "Trang tổng quan",
