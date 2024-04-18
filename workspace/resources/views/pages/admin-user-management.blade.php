@@ -10,10 +10,10 @@
                 <i class="bi bi-search"></i>
             </button>
         </form>
-        <button class="btn btn-primary flex-shrink-0" title="{{ trans('add_new_user') }}">
+        <a href="/admin/mng/users/create.html" class="btn btn-primary flex-shrink-0" title="{{ trans('add_new_user') }}">
             <i class="bi bi-plus-lg"></i>
             {{ trans('add_new_user') }}
-        </button>
+        </a>
     </div>
     <div class="table-sticky-container" style="height: 560px">
         <table class="table">

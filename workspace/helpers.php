@@ -118,7 +118,7 @@ function query(string $key = null, string | null $defaultValue = null): mixed
 function route(string $path, array $queries = []): string
 {
     if (count($queries) === 0) return $path;
-    return $path . "/?" . http_build_query($queries);
+    return $path . "?" . http_build_query($queries);
 }
 
 /**

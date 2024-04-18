@@ -53,6 +53,8 @@ return [
     // Common document title
     "cms_dashboard" => "Trang tổng quan",
     "cms_user_management" => "Quản lý người dùng",
+    "cms_user_details" => "Xem thông tin người dùng",
+    "cms_user_create" => "Tạo mới người dùng",
     "cms_category_management" => "Quản lý danh mục",
     "cms_post_management" => "Quản lý bài viết",
     "cms_attachment_management" => "Quản lý tệp tin",

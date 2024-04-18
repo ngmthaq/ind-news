@@ -65,6 +65,8 @@ class Feature extends Model
     public function isActive(): bool
     {
         $url = str_replace("/public", "", $_SERVER["REDIRECT_URL"]);
-        return $this->url === $url;
+        $routePath = str_replace(".html", "", $this->url);
+        $routePath = str_replace(".json", "", $routePath);
+        return str_starts_with($url, $routePath);
     }
 }
