@@ -45,4 +45,32 @@ class UserRepo extends Repo implements UserRepoInterface
 
         return new Pagination($users, $totalUsers, $limit, $offset);
     }
+
+    public function create(User $user): array
+    {
+        $response = [];
+        if (filter_var($user->email, FILTER_VALIDATE_EMAIL) === false) {
+            $response["email"] = trans("error_invalidate_email");
+        }
+        if (trim($user->name) === "") {
+            $response["name"] = trans("error_required_field");
+        }
+        if (trim($user->dob) === "") {
+            $response["dob"] = trans("error_required_field");
+        }
+        if (trim($user->gender) === "") {
+            $response["gender"] = trans("error_required_field");
+        }
+        if (trim($user->role) === "") {
+            $response["role"] = trans("error_required_field");
+        }
+        if (trim($user->password) === "") {
+            $response["password"] = trans("error_required_field");
+        }
+        if (count($response) > 0) {
+            return $response;
+        }
+
+        return [];
+    }
 }

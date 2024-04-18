@@ -28,3 +28,11 @@ export const toggleThemeMode = () => {
 export const getXSRFToken = () => {
   return { key: window.__x_csrf_key, value: window.__x_csrf_token };
 };
+
+export const extendSettingTime = () => {
+  const theme = getThemeMode();
+  changeThemeMode(theme);
+  const themeKey = "PHPTOGGLESIDEBAR";
+  const sidebar = CookieJs.get(themeKey);
+  CookieJs.set(themeKey, sidebar, { expires: 30 });
+};

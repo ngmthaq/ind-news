@@ -42,6 +42,7 @@ return [
     "action" => "Hành động",
     "no_data" => "Không có dữ liệu hiển thị",
     "admin" => "QTV",
+    "admin_long_name" => "Quản trị viên",
     "user" => "Người dùng",
     "male" => "Nam",
     "female" => "Nữ",
@@ -49,6 +50,15 @@ return [
     "toggle_sidebar_tooltip" => "Nhấn Ctrl+B để chuyển đổi đóng/mở thanh sidebar",
     "pagination_desc" => "Hiển thị giá trị từ {{from}} đến {{to}} trên tổng số {{total}}",
     "toggle_theme_tooltip" => "Nhấn Ctrl+M để chuyển đổi chế độ hiển thị",
+    "go_back" => "Quay lại",
+    "cancel" => "Hủy",
+    "avatar" => "Ảnh đại diện",
+    "default_password" => "Mật khẩu mặc định",
+    "need_verify_email" => "Yêu cầu xác nhận email",
+    "yes" => "Có",
+    "no" => "Không",
+    "reset" => "Đặt lại dữ liệu",
+    "create" => "Tạo mới",
 
     // Common document title
     "cms_dashboard" => "Trang tổng quan",

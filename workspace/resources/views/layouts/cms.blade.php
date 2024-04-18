@@ -26,7 +26,7 @@
             <section class="cms-section">
                 @yield('content')
             </section>
-            <div class="text-center mt-3">
+            <div class="text-center mt-4">
                 <small>Copyright @ngmthaq ©️ 2024 - {{ date('Y') }}</small>
             </div>
         </div>

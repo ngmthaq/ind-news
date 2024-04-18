@@ -149,10 +149,17 @@ class RouterFactory extends Factory
             return [new AuthController(), "logout"];
         }
 
-        // Admin Setting Page
+        // Handle Admin Save Setting
         if ($method === "POST" && $path === "/admin/setting.html") {
             $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
             return [new AdminSettingController($featureRepo), "save"];
+        }
+
+        // Handle Admin Create New User
+        if ($method === "POST" && $path === "/admin/mng/users/create.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            $userRepo = $this->repoFactory->resolve(UserRepoInterface::class);
+            return [new AdminUserManagementController($featureRepo, $userRepo), "add"];
         }
 
         // Resolve Dynamic Route or 404 Not Found

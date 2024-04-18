@@ -1,4 +1,10 @@
+import $ from "jquery";
+import { extendSettingTime } from "./helpers";
 import "bootstrap";
 import "../scss/index.scss";
 
-(async () => {})();
+(async () => {
+  $(function () {
+    extendSettingTime();
+  });
+})();

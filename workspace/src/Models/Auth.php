@@ -46,10 +46,8 @@ class Auth extends User
             $credentials = json_decode($cookie, true);
             $email = $credentials["email"];
             $password = $credentials["password"];
-            $updatedAt = $credentials["updatedAt"];
             if (empty($email)) return null;
             if (empty($password)) return null;
-            if (empty($updatedAt)) return null;
             $db = new Database();
             $db->setSql("SELECT * FROM users WHERE email = :email AND password = :password AND deleted_at IS NULL LIMIT 1 OFFSET 0");
             $db->setParam(":email", $email, PDO::PARAM_STR);
@@ -58,7 +56,8 @@ class Auth extends User
             $data = $stm->fetch();
             if (empty($data)) return null;
             $user = User::fromArray(arraySnakeToCamel($data));
-            if ($user->updatedAt !== $updatedAt) return null;
+            $time = time() + 60 * 60 * 24 * 30; // 30 days
+            setcookie(self::AUTH_KEY, $cipher, $time, "/");
             return $user;
         } catch (\Throwable $th) {
             self::logout();

@@ -22,4 +22,13 @@ interface UserRepoInterface extends RepoInterface
      * @return Pagination
      */
     public function paginate(string $filter, int $limit, int $offset): Pagination;
+
+    /**
+     * Create new user \
+     * If response array.length === 0 ? success : fail
+     * 
+     * @param User $user raw user data
+     * @return array error array
+     */
+    public function create(User $user): array;
 }

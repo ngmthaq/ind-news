@@ -42,6 +42,12 @@ class AdminUserManagementController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_user_create"), "", "", "", "");
         $features = $this->featureRepo->all();
-        echo view("pages.admin-user-details", compact("seo", "features"));
+        $defaultPassword = generateRandomString();
+        echo view("pages.admin-user-create", compact("seo", "features", "defaultPassword"));
+    }
+
+    public function add()
+    {
+        $this->checkAuthAndPermission();
     }
 }
