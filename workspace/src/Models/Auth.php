@@ -2,6 +2,7 @@
 
 namespace Src\Models;
 
+use PDO;
 use Src\Configs\Aes;
 use Src\Configs\Database;
 
@@ -19,13 +20,14 @@ class Auth extends User
     public static function attempt(string $email, string $password): User|null
     {
         $db = new Database();
-        $time = time() + 60 * 60 * 24 * 30; // 30 days
-        $sql = "SELECT * FROM users WHERE email = ? AND password = ? AND deleted_at IS NULL LIMIT 1 OFFSET 0";
-        $params = [$email, md5($password)];
-        $stm = $db->setSql($sql)->setParams($params)->exec();
+        $db->setSql("SELECT * FROM users WHERE email = :email AND password = :password AND deleted_at IS NULL LIMIT 1 OFFSET 0");
+        $db->setParam(":email", $email, PDO::PARAM_STR);
+        $db->setParam(":password", md5($password), PDO::PARAM_STR);
+        $stm = $db->exec();
         $data = $stm->fetch();
         if (empty($data)) return null;
         $user = User::fromArray(arraySnakeToCamel($data));
+        $time = time() + 60 * 60 * 24 * 30; // 30 days
         setcookie(self::AUTH_KEY, Aes::encrypt(json_encode($user)), $time, "/");
         return $user;
     }
@@ -49,9 +51,10 @@ class Auth extends User
             if (empty($password)) return null;
             if (empty($updatedAt)) return null;
             $db = new Database();
-            $sql = "SELECT * FROM users WHERE email = ? AND password = ? AND deleted_at IS NULL LIMIT 1 OFFSET 0";
-            $params = [$email, $password];
-            $stm = $db->setSql($sql)->setParams($params)->exec();
+            $db->setSql("SELECT * FROM users WHERE email = :email AND password = :password AND deleted_at IS NULL LIMIT 1 OFFSET 0");
+            $db->setParam(":email", $email, PDO::PARAM_STR);
+            $db->setParam(":password", $password, PDO::PARAM_STR);
+            $stm = $db->exec();
             $data = $stm->fetch();
             if (empty($data)) return null;
             $user = User::fromArray(arraySnakeToCamel($data));

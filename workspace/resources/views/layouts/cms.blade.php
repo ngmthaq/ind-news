@@ -10,7 +10,19 @@
     <div id="admin-layout">
         @include('partials.admin-sidebar', compact('features'))
         <div class="admin-wrapper">
-            <h1 class="cms-title"><?php echo $seo->title; ?></h1>
+            <h1 class="cms-title d-flex align-items-center justify-content-between">
+                <span><?php echo $seo->title; ?></span>
+                <button id="toggle-theme-cms-button"
+                    class="btn @if ($_COOKIE['PHPTHEME'] === 'light') btn-dark @else btn-light @endif"
+                    title="{{ trans('toggle_theme_tooltip') }}" data-light-icon="bi bi-sun-fill"
+                    data-dark-icon="bi bi-moon-fill">
+                    @if ($_COOKIE['PHPTHEME'] === 'light')
+                        <i class="bi bi-moon-fill"></i>
+                    @else
+                        <i class="bi bi-sun-fill"></i>
+                    @endif
+                </button>
+            </h1>
             <section class="cms-section">
                 @yield('content')
             </section>

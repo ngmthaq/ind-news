@@ -48,6 +48,7 @@ return [
     "other" => "Khác",
     "toggle_sidebar_tooltip" => "Nhấn Ctrl+B để chuyển đổi đóng/mở thanh sidebar",
     "pagination_desc" => "Hiển thị giá trị từ {{from}} đến {{to}} trên tổng số {{total}}",
+    "toggle_theme_tooltip" => "Nhấn Ctrl+M để chuyển đổi chế độ hiển thị",
 
     // Common document title
     "cms_dashboard" => "Trang tổng quan",
@@ -58,7 +59,7 @@ return [
     "cms_ads_management" => "Nội dung quảng cáo",
     "cms_activity_management" => "Hoạt động hệ thống",
     "cms_profile" => "Hồ sơ cá nhân",
-    "cms_setting" => "Cài đặt",
+    "cms_setting" => "Cài đặt SEO",
     "title_homepage" => "Trang chủ - Trang thông tin công nghiệp - Industry News",
     "title_category" => ":category - Danh mục - Trang thông tin công nghiệp - Industry News",
     "title_post" => ":post - Bài viết - Trang thông tin công nghiệp - Industry News",

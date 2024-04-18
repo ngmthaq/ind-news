@@ -4,21 +4,6 @@
     <form id="setting-form" method="post">
         {!! csrfInput() !!}
         <div class="row">
-            <div class="mb-4 col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
-                <label for="theme-mode" class="form-label required">{{ trans('theme_mode') }}</label>
-                <select class="form-select" id="theme-mode" name="theme">
-                    <option value="light">{{ trans('light_mode') }}</option>
-                    <option value="dark">{{ trans('dark_mode') }}</option>
-                </select>
-            </div>
-            <div class="mb-4 col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
-                <label for="language" class="form-label required">{{ trans('language') }}</label>
-                <select class="form-select" id="language" name="language">
-                    <option value="vi">Tiếng Việt</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
             <div class="mb-4">
                 <label for="seo-title" class="form-label required">{{ trans('seo_title') }}</label>
                 <input type="text" class="form-control" id="seo-title" name="title" placeholder="Industry News">

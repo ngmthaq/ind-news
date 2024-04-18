@@ -3,7 +3,9 @@
 @section('content')
     <div class="d-flex align-items-center justify-content-between gap-2 mb-4">
         <form class="input-group" style="max-width: 500px" title="{{ trans('search_user_placeholder') }}">
-            <input type="text" class="form-control" id="search-input" placeholder="{{ trans('search_user_placeholder') }}">
+            <input type="text" class="form-control" name="filter" placeholder="{{ trans('search_user_placeholder') }}"
+                value="{{ query('filter', '') }}">
+            <input type="hidden" name="page" value="1">
             <button class="input-group-text btn btn-primary" type="submit">
                 <i class="bi bi-search"></i>
             </button>
@@ -13,7 +15,7 @@
             {{ trans('add_new_user') }}
         </button>
     </div>
-    <div class="table-sticky-container" style="height: 600px">
+    <div class="table-sticky-container" style="height: 560px">
         <table class="table">
             <thead>
                 <tr>
@@ -42,11 +44,11 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                @if (isset($users) && count($users) > 0)
-                    @foreach ($users as $index => $user)
+                @if (isset($pagination) && isset($pagination->data) && count($pagination->data) > 0)
+                    @foreach ($pagination->data as $index => $user)
                         <tr>
                             <th style="vertical-align: middle" scope="row" title="{{ $index + 1 }}">
-                                {{ $index + 1 }}
+                                {{ $pagination->offset + $index + 1 }}
                             </th>
                             <td style="vertical-align: middle" title="{{ $user->email }}">
                                 {{ $user->email }}
@@ -93,36 +95,39 @@
             </tbody>
         </table>
     </div>
-    @if (isset($users) && count($users) > 0)
+    @if (isset($pagination) && isset($pagination->data) && count($pagination->data) > 0)
         <div class="d-flex align-items-center justify-content-between gap-2  mt-3">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link disabled" href="#" aria-label="Previous">
+                        <a class="page-link @if ($pagination->currentPage === 1) disabled @endif"
+                            href="{{ route('/admin/mng/users.html', array_merge(query(), ['page' => 1])) }}">
                             <i class="bi bi-chevron-bar-left"></i>
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link disabled" href="#" aria-label="Previous">
+                        <a class="page-link @if ($pagination->currentPage === 1) disabled @endif"
+                            href="{{ route('/admin/mng/users.html', array_merge(query(), ['page' => $pagination->prevPage])) }}">
                             <i class="bi bi-chevron-left"></i>
                         </a>
                     </li>
+                    @for ($i = 1; $i <= $pagination->totalPages; $i++)
+                        <li class="page-item">
+                            <a class="page-link @if ($pagination->currentPage === $i) active @endif"
+                                href="{{ route('/admin/mng/users.html', array_merge(query(), ['page' => $i])) }}">
+                                {{ $i }}
+                            </a>
+                        </li>
+                    @endfor
                     <li class="page-item">
-                        <a class="page-link active" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                        <a class="page-link @if ($pagination->currentPage === $pagination->totalPages) disabled @endif"
+                            href="{{ route('/admin/mng/users.html', array_merge(query(), ['page' => $pagination->nextPage])) }}">
                             <i class="bi bi-chevron-right"></i>
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
+                        <a class="page-link @if ($pagination->currentPage === $pagination->totalPages) disabled @endif"
+                            href="{{ route('/admin/mng/users.html', array_merge(query(), ['page' => $pagination->totalPages])) }}">
                             <i class="bi bi-chevron-bar-right"></i>
                         </a>
                     </li>
@@ -130,7 +135,11 @@
             </nav>
             <div>
                 <small>
-                    {{ trans('pagination_desc', ['from' => 1, 'to' => 10, 'total' => 100]) }}
+                    {{ trans('pagination_desc', [
+                        'from' => $pagination->fromItems,
+                        'to' => $pagination->toItems,
+                        'total' => $pagination->totalItems,
+                    ]) }}
                 </small>
             </div>
         </div>

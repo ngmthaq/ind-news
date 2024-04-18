@@ -21,7 +21,11 @@ class AdminUserManagementController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_user_management"), "", "", "", "");
         $features = $this->featureRepo->all();
-        $users = $this->userRepo->all();
-        echo view("pages.admin-user-management", compact("seo", "features", "users"));
+        $filter = query("filter", "");
+        $page = (int)query("page", 1);
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+        $pagination = $this->userRepo->paginate($filter, $limit, $offset);
+        echo view("pages.admin-user-management", compact("seo", "features", "pagination"));
     }
 }

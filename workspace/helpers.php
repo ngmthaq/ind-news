@@ -82,28 +82,30 @@ function xss(array $array): array
  * Handle $_POST data
  * 
  * @param string $key
+ * @param string | null $defaultValue
  * @return mixed
  */
-function input(string $key = null): mixed
+function input(string $key = null, string | null $defaultValue = null): mixed
 {
     $data = xss($_POST);
     if ($key === null) return $data;
     if (isset($data[$key])) return $data[$key];
-    return null;
+    return $defaultValue;
 }
 
 /**
  * Handle $_GET data
  * 
  * @param string $key
+ * @param string | null $defaultValue
  * @return mixed
  */
-function query(string $key = null): mixed
+function query(string $key = null, string | null $defaultValue = null): mixed
 {
     $data = xss($_GET);
     if ($key === null) return $data;
     if (isset($data[$key])) return $data[$key];
-    return null;
+    return $defaultValue;
 }
 
 /**

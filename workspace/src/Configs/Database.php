@@ -39,12 +39,14 @@ class Database
     /**
      * Set params
      * 
-     * @param array $params
+     * @param string $name
+     * @param mixed $value
+     * @param int $type
      * @return Database
      */
-    public function setParams(array $params): Database
+    public function setParam(string $name, mixed $value, int $type): Database
     {
-        $this->params = $params;
+        $this->params[] = compact("name", "value", "type");
         return $this;
     }
 
@@ -65,7 +67,8 @@ class Database
         error_log($infoMessage, 3, $logFile);
         $stm = $this->pdo->prepare($sql);
         $stm->setFetchMode(PDO::FETCH_ASSOC);
-        $stm->execute($this->params);
+        foreach ($this->params as $param) $stm->bindValue($param["name"], $param["value"], $param["type"]);
+        $stm->execute();
         $this->sql = "";
         $this->params = [];
         return $stm;
