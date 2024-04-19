@@ -89,4 +89,5 @@ return [
     // Admin CMS User Management
     "search_user_placeholder" => "Tìm kiếm người dùng qua email hoặc tên",
     "add_new_user" => "Thêm mới người dùng",
+    "edit_user" => "Cập nhật thông tin người dùng",
 ];

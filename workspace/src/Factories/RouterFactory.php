@@ -92,6 +92,13 @@ class RouterFactory extends Factory
             return [new AdminUserManagementController($featureRepo, $userRepo), "create"];
         }
 
+        // Admin User Edit Page
+        if ($method === "GET" && $path === "/admin/mng/users/edit.html") {
+            $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);
+            $userRepo = $this->repoFactory->resolve(UserRepoInterface::class);
+            return [new AdminUserManagementController($featureRepo, $userRepo), "edit"];
+        }
+
         // Admin Category Management Page
         if ($method === "GET" && $path === "/admin/mng/categories.html") {
             $featureRepo = $this->repoFactory->resolve(FeatureRepoInterface::class);

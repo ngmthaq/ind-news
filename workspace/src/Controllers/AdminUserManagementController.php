@@ -55,6 +55,18 @@ class AdminUserManagementController extends AdminCmsController
         echo view("pages.admin-user-create", compact("seo", "features", "defaultPassword"));
     }
 
+    public function edit()
+    {
+        $this->checkAuthAndPermission();
+        $seo = new Seo(trans("edit_user"), "", "", "", "");
+        $features = $this->featureRepo->all();
+        $id = query("id");
+        if (empty($id)) throw new NotFoundException();
+        $user = $this->userRepo->find($id);
+        if (empty($user)) throw new NotFoundException();
+        echo view("pages.admin-user-update", compact("seo", "features", "user"));
+    }
+
     public function add()
     {
         $this->checkAuthAndPermission();
