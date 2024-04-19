@@ -4,6 +4,7 @@ namespace Src\Controllers;
 
 use Src\Configs\Csrf;
 use Src\Configs\Throttle;
+use Src\Models\Auth;
 
 abstract class Controller
 {
@@ -13,6 +14,18 @@ abstract class Controller
         Csrf::init();
         Csrf::check();
         $this->getOldFormData();
+    }
+
+    /**
+     * Check auth and permission
+     * 
+     * @return void
+     */
+    protected function checkAuthAndPermission(): void
+    {
+        $user = Auth::user();
+        if (empty($user)) redirect("/login.html", ["callbackUrl" => getCurrentUrl()]);
+        if ($user->isActive() === false) redirect("/email/verify.html");
     }
 
     /**

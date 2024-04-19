@@ -94,13 +94,23 @@ class User extends Model
     }
 
     /**
-     * Get role name
+     * Get role short name
      * 
      * @return string
      */
     public function getRole(): string
     {
         return trans($this->isAdmin() ? "admin" : "user");
+    }
+
+    /**
+     * Get role in long name
+     * 
+     * @return string
+     */
+    public function getRoleLongName(): string
+    {
+        return trans($this->isAdmin() ? "admin_long_name" : "user");
     }
 
     /**
@@ -123,5 +133,15 @@ class User extends Model
     public function isActive(): bool
     {
         return $this->deletedAt === null;
+    }
+
+    /**
+     * Check email is verified
+     * 
+     * @return bool
+     */
+    public function isVerified(): bool
+    {
+        return $this->emailVerifiedAt !== null;
     }
 }

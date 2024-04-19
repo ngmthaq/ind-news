@@ -5,6 +5,7 @@ namespace Src\Controllers;
 use Src\Configs\Firebase;
 use Src\Configs\Hash;
 use Src\Configs\UploadedFile;
+use Src\Exceptions\NotFoundException;
 use Src\Models\Seo;
 use Src\Models\User;
 use Src\Repos\FeatureRepoInterface;
@@ -38,7 +39,11 @@ class AdminUserManagementController extends AdminCmsController
         $this->checkAuthAndPermission();
         $seo = new Seo(trans("cms_user_details"), "", "", "", "");
         $features = $this->featureRepo->all();
-        echo view("pages.admin-user-details", compact("seo", "features"));
+        $id = query("id");
+        if (empty($id)) throw new NotFoundException();
+        $user = $this->userRepo->find($id);
+        if (empty($user)) throw new NotFoundException();
+        echo view("pages.admin-user-details", compact("seo", "features", "user"));
     }
 
     public function create()

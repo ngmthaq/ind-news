@@ -60,6 +60,8 @@ return [
     "no" => "Không",
     "reset" => "Đặt lại dữ liệu",
     "create" => "Tạo mới",
+    "is_email_verified" => "Tài khoản đã xác thực",
+    "is_account_active" => "Tài khoản đã kích hoạt",
 
     // Common document title
     "cms_dashboard" => "Trang tổng quan",

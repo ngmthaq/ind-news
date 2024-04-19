@@ -31,4 +31,12 @@ interface UserRepoInterface extends RepoInterface
      * @return array error array
      */
     public function create(User $user): array;
+
+    /**
+     * Get user details
+     * 
+     * @param int $id
+     * @return User|null
+     */
+    public function find(int $id): User|null;
 }

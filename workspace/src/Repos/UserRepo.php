@@ -93,4 +93,15 @@ class UserRepo extends Repo implements UserRepoInterface
 
         return [];
     }
+
+    public function find(int $id): User|null
+    {
+        $db = new Database();
+        $db->setSql("SELECT * FROM users WHERE id = :id LIMIT 1");
+        $db->setParam(":id", $id, PDO::PARAM_INT);
+        $stm = $db->exec();
+        $data = $stm->fetch();
+        if (empty($data)) return null;
+        return User::fromArray(arraySnakeToCamel($data));
+    }
 }
