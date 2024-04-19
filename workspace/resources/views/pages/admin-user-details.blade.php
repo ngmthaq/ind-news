@@ -42,7 +42,7 @@
                     <label class="form-check-label">{{ trans('is_email_verified') }}</label>
                 </div>
                 <div class="d-flex align-items-center justify-content-end gap-2">
-                    <a href="/admin/mng/users.html" class="btn btn-primary">{{ trans('go_back') }}</a>
+                    <a href="{{ query('callbackUrl') }}" class="btn btn-primary">{{ trans('go_back') }}</a>
                 </div>
             </div>
         </div>

@@ -529,6 +529,16 @@ function getCurrentUrl(): string
 }
 
 /**
+ * Get current full url with search params
+ * 
+ * @return string
+ */
+function getCurrentFullUrl(): string
+{
+    return $_SERVER["REQUEST_URI"];
+}
+
+/**
  * Get X-CSRF input
  * 
  * @return string

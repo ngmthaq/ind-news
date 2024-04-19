@@ -88,7 +88,7 @@
             </div>
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-end gap-2">
-                    <a href="/admin/mng/users.html" class="btn btn-danger">{{ trans('cancel') }}</a>
+                    <a href="{{ query('callbackUrl') }}" class="btn btn-danger">{{ trans('cancel') }}</a>
                     <button class="btn btn-secondary" type="reset">{{ trans('reset') }}</button>
                     <button class="btn btn-primary" type="submit">{{ trans('create') }}</button>
                 </div>

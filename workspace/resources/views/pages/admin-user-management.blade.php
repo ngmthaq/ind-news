@@ -3,14 +3,15 @@
 @section('content')
     <div class="d-flex align-items-center justify-content-between gap-2 mb-4">
         <form class="input-group" style="max-width: 500px" title="{{ trans('search_user_placeholder') }}">
-            <input type="text" class="form-control" name="filter" placeholder="{{ trans('search_user_placeholder') }}"
+            <input type="search" class="form-control" name="filter" placeholder="{{ trans('search_user_placeholder') }}"
                 value="{{ query('filter', '') }}">
             <input type="hidden" name="page" value="1">
             <button class="input-group-text btn btn-primary" type="submit">
                 <i class="bi bi-search"></i>
             </button>
         </form>
-        <a href="/admin/mng/users/create.html" class="btn btn-primary flex-shrink-0" title="{{ trans('add_new_user') }}">
+        <a href="{{ route('/admin/mng/users/create.html', ['callbackUrl' => getCurrentFullUrl()]) }}"
+            class="btn btn-primary flex-shrink-0" title="{{ trans('add_new_user') }}">
             <i class="bi bi-plus-lg"></i>
             {{ trans('add_new_user') }}
         </a>
@@ -75,11 +76,11 @@
                             </td>
                             <td>
                                 <a class=" btn btn-sm btn-outline-primary"
-                                    href="{{ route('/admin/mng/users/show.html', ['id' => $user->id]) }}">
+                                    href="{{ route('/admin/mng/users/show.html', ['id' => $user->id, 'callbackUrl' => getCurrentFullUrl()]) }}">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
                                 <a class="btn btn-sm btn-outline-warning"
-                                    href="{{ route('/admin/mng/users/edit.html', ['id' => $user->id]) }}">
+                                    href="{{ route('/admin/mng/users/edit.html', ['id' => $user->id, 'callbackUrl' => getCurrentFullUrl()]) }}">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
                             </td>
