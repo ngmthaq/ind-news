@@ -21,8 +21,8 @@ class Firebase
 
     public function __construct()
     {
-        $this->factory = new Factory();
-        $this->factory->withServiceAccount(ROOT . $_ENV["FIREBASE_CREDENTIALS_JSON"]);
+        $factory = new Factory();
+        $this->factory = $factory->withServiceAccount(ROOT . $_ENV["FIREBASE_CREDENTIALS_JSON"]);
         $this->storage = $this->factory->createStorage();
         $this->firestore = $this->factory->createFirestore();
     }
@@ -84,16 +84,17 @@ class Firebase
      * Upload File
      * 
      * @param string $name
-     * @param string $source
+     * @param string $
+     * @param bool $isNeedFClose
      * @return array
      */
-    public function uploadObject(string $name, string $source): array
+    public function uploadObject(string $name, string $source, bool $isNeedFClose = true): array
     {
         $file = fopen($source, "r");
-        if (!$file) throw new \Exception("Không thể đọc tệp tin");
+        if (!$file) throw new \Exception(trans("error_cannot_open_file"));
         $bucket = $this->storage->getBucket();
         $object = $bucket->upload($file, ["name" => $name, "predefinedAcl" => "publicRead"]);
-        fclose($file);
+        if ($isNeedFClose === true) fclose($file);
         $publicUrl = "https://storage.googleapis.com/" . $_ENV["FIREBASE_STORAGE_BUCKET"] . "/" . $name;
         return compact("object", "publicUrl");
     }
@@ -107,6 +108,8 @@ class Firebase
     public function deleteObject(string $name): bool
     {
         try {
+            $publicBaseUrl = "https://storage.googleapis.com/" . $_ENV["FIREBASE_STORAGE_BUCKET"] . "/";
+            if (str_starts_with($name, $publicBaseUrl)) $name = str_replace($publicBaseUrl, "", $name);
             $bucket = $this->storage->getBucket();
             $object = $bucket->object($name);
             $object->delete();

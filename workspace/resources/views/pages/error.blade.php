@@ -63,6 +63,13 @@
         a {
             color: #0d6efd;
         }
+
+        pre {
+            width: 100%;
+            color: #f8f9fa;
+            margin-top: 32px;
+            white-space: pre-line;
+        }
     </style>
 </head>
 
@@ -77,14 +84,10 @@
                 <a href="/">&#8629; {{ trans('back_to_homepage') }}</a>
             </span>
         @endif
+        @if (!isProd())
+            <pre>{{ json_encode($details) }}</pre>
+        @endif
     </section>
-
-    @if (isProd() === false)
-        <script>
-            console.error("Error: {!! $message !!} ({!! $code !!})");
-            console.error(JSON.parse("{!! json_encode($details) !!}"));
-        </script>
-    @endif
 </body>
 
 </html>

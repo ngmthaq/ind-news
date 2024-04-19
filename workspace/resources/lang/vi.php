@@ -13,6 +13,7 @@ return [
     "error_repository_factory" => "Đã xảy ra lỗi khi chạy Repository",
     "error_compress_image" => "Đã xảy ra lỗi khi xử lý tối ưu hình ảnh",
     "error_aes_decrypt" => "Đã xảy ra lỗi khi giải mã dữ liệu",
+    "error_cannot_open_file" => "Đã xảy ra lỗi khi đọc dữ liệu của tệp tin",
 
     // Validation errors
     "error_invalidate_email" => "Email không đúng định dạng",

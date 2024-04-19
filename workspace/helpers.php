@@ -487,7 +487,7 @@ function arraySnakeToCamel(array $input): array
  */
 function convertStringToSlug(string $string, string $symbol = '-'): string
 {
-    if (empty($string)) throw new \Exception("");
+    if (empty($string)) return "";
     $character_a = array('à', 'á', 'ạ', 'ả', 'ã', 'â', 'ầ', 'ấ', 'ậ', 'ẩ', 'ẫ', 'ă', 'ằ', 'ắ', 'ặ', 'ẳ', 'ẵ');
     $character_e = array('è', 'é', 'ẹ', 'ẻ', 'ẽ', 'ê', 'ề', 'ế', 'ệ', 'ể', 'ễ');
     $character_i = array('ì', 'í', 'ị', 'ỉ', 'ĩ');

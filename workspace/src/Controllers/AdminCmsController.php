@@ -11,6 +11,7 @@ class AdminCmsController extends Controller
 
     public function __construct(FeatureRepoInterface $featureRepo)
     {
+        parent::__construct();
         $this->featureRepo = $featureRepo;
     }
 

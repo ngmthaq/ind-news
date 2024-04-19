@@ -48,8 +48,11 @@ class UserRepo extends Repo implements UserRepoInterface
 
     public function create(User $user): array
     {
+        // Validate file type
         $response = [];
-        if (filter_var($user->email, FILTER_VALIDATE_EMAIL) === false) {
+        if (trim($user->email) === "") {
+            $response["email"] = trans("error_required_field");
+        } elseif (filter_var($user->email, FILTER_VALIDATE_EMAIL) === false) {
             $response["email"] = trans("error_invalidate_email");
         }
         if (trim($user->name) === "") {
@@ -70,6 +73,23 @@ class UserRepo extends Repo implements UserRepoInterface
         if (count($response) > 0) {
             return $response;
         }
+
+        // Insert to the database
+        $db = new Database();
+        $db->setSql("INSERT INTO users "
+            . "(email, password, name, avatar, dob, gender, role, email_verified_at, created_at, updated_at) VALUES "
+            . "(:email, :password, :name, :avatar, :dob, :gender, :role, :email_verified_at, :created_at, :updated_at)");
+        $db->setParam(":email", $user->email, PDO::PARAM_STR);
+        $db->setParam(":password", $user->password, PDO::PARAM_STR);
+        $db->setParam(":name", $user->name, PDO::PARAM_STR);
+        $db->setParam(":avatar", $user->avatar, PDO::PARAM_STR);
+        $db->setParam(":dob", $user->dob, PDO::PARAM_STR);
+        $db->setParam(":gender", $user->gender, PDO::PARAM_INT);
+        $db->setParam(":role", $user->role, PDO::PARAM_INT);
+        $db->setParam(":email_verified_at", $user->emailVerifiedAt, PDO::PARAM_NULL | PDO::PARAM_STR);
+        $db->setParam(":created_at", $user->createdAt, PDO::PARAM_STR);
+        $db->setParam(":updated_at", $user->updatedAt, PDO::PARAM_STR);
+        $db->exec();
 
         return [];
     }

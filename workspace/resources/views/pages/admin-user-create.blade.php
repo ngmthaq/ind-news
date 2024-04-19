@@ -2,42 +2,60 @@
 
 @section('content')
     <form method="POST" enctype="multipart/form-data">
+        {!! csrfInput() !!}
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="mb-3">
                     <label for="email" class="form-label required">{{ trans('email_address') }}</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com"
+                        value="{{ old('email') }}">
+                    <small class="text-danger">{{ flash('email') }}</small>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="mb-3">
                     <label for="name" class="form-label required">{{ trans('name') }}</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nguyen Van A">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Join Due"
+                        value="{{ old('name') }}">
+                    <small class="text-danger">{{ flash('name') }}</small>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="mb-3">
                     <label for="dob" class="form-label required">{{ trans('dob') }}</label>
-                    <input type="date" class="form-control" id="dob" name="dob">
+                    <input type="date" class="form-control" id="dob" name="dob" value="{{ old('dob') }}">
+                    <small class="text-danger">{{ flash('dob') }}</small>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="mb-3">
                     <label for="gender" class="form-label required">{{ trans('gender') }}</label>
                     <select class="form-select" id="gender" name="gender">
-                        <option value="1">{{ trans('male') }}</option>
-                        <option value="2">{{ trans('female') }}</option>
-                        <option value="3">{{ trans('other') }}</option>
+                        <option value="1" @if (old('gender') === '1') selected @endif>
+                            {{ trans('male') }}
+                        </option>
+                        <option value="2" @if (old('gender') === '2') selected @endif>
+                            {{ trans('female') }}
+                        </option>
+                        <option value="3" @if (old('gender') === '3') selected @endif>
+                            {{ trans('other') }}
+                        </option>
                     </select>
+                    <small class="text-danger">{{ flash('gender') }}</small>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="mb-3">
                     <label for="role" class="form-label required">{{ trans('role') }}</label>
                     <select class="form-select" id="role" name="role">
-                        <option value="1">{{ trans('user') }}</option>
-                        <option value="2">{{ trans('admin_long_name') }}</option>
+                        <option value="1" @if (old('role') === '1') selected @endif>
+                            {{ trans('user') }}
+                        </option>
+                        <option value="2" @if (old('role') === '2') selected @endif>
+                            {{ trans('admin_long_name') }}
+                        </option>
                     </select>
+                    <small class="text-danger">{{ flash('role') }}</small>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
@@ -51,15 +69,21 @@
                     <label for="password" class="form-label required">{{ trans('default_password') }}</label>
                     <input type="text" class="form-control" id="password" name="password"
                         value="{{ $defaultPassword }}" readonly>
+                    <small class="text-danger">{{ flash('password') }}</small>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="mb-3">
                     <label for="need-verify-email" class="form-label required">{{ trans('need_verify_email') }}</label>
                     <select class="form-select" id="need-verify-email" name="need-verify-email">
-                        <option value="0">{{ trans('no') }}</option>
-                        <option value="1">{{ trans('yes') }}</option>
+                        <option value="" @if (old('need-verify-email') === '') selected @endif>
+                            {{ trans('no') }}
+                        </option>
+                        <option value="1" @if (old('need-verify-email') === '1') selected @endif>
+                            {{ trans('yes') }}
+                        </option>
                     </select>
+                    <small class="text-danger">{{ flash('need-verify-email') }}</small>
                 </div>
             </div>
             <div class="col-12">

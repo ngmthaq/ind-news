@@ -2,7 +2,11 @@
 
 namespace Src\Controllers;
 
+use Src\Configs\Firebase;
+use Src\Configs\Hash;
+use Src\Configs\UploadedFile;
 use Src\Models\Seo;
+use Src\Models\User;
 use Src\Repos\FeatureRepoInterface;
 use Src\Repos\UserRepoInterface;
 
@@ -49,5 +53,26 @@ class AdminUserManagementController extends AdminCmsController
     public function add()
     {
         $this->checkAuthAndPermission();
+        $file = new UploadedFile($_FILES["avatar"]);
+        $publicImageUrl = "/images/avatar.png";
+
+        // Upload image to firebase storage
+        if ($file->isValid) {
+            $firebase = new Firebase();
+            $response = $firebase->uploadObject($file->getRandomName("userAvatar"), $file->tmpName, false);
+            $publicImageUrl = $response["publicUrl"];
+        }
+
+        // Create user
+        $now = date("Y-m-d H:i:s");
+        $emailVerifiedAt = input("need-verify-email") === "" ? date("Y-m-d H:i:s") : null;
+        $user = new User("", input("email"), Hash::make(input("password")), input("name"), $publicImageUrl, input("dob"), input("gender"), input("role"), $emailVerifiedAt, $now, $now, null);
+        $errors = $this->userRepo->create($user);
+        if (count($errors) > 0) {
+            flashFromArray($errors);
+            reload();
+        } else {
+            redirect("/admin/mng/users.html");
+        }
     }
 }

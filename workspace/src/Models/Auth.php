@@ -5,6 +5,7 @@ namespace Src\Models;
 use PDO;
 use Src\Configs\Aes;
 use Src\Configs\Database;
+use Src\Configs\Hash;
 
 class Auth extends User
 {
@@ -22,7 +23,7 @@ class Auth extends User
         $db = new Database();
         $db->setSql("SELECT * FROM users WHERE email = :email AND password = :password AND deleted_at IS NULL LIMIT 1 OFFSET 0");
         $db->setParam(":email", $email, PDO::PARAM_STR);
-        $db->setParam(":password", md5($password), PDO::PARAM_STR);
+        $db->setParam(":password", Hash::make($password), PDO::PARAM_STR);
         $stm = $db->exec();
         $data = $stm->fetch();
         if (empty($data)) return null;
