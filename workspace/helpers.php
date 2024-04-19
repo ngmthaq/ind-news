@@ -183,6 +183,11 @@ function view(string $path, array $data = []): string
     $cachedPath = ROOT . "/resources/cached";
     $blade = new BladeOne($viewPath, $cachedPath, isProd() ? BladeOne::MODE_AUTO : BladeOne::MODE_DEBUG);
     $blade->pipeEnable = true;
+    $_flash = $_SESSION["_flash"];
+    $_old = $_SESSION["_old"];
+    $data = array_merge($data, compact("_flash", "_old"));
+    unset($_SESSION["_flash"]);
+    unset($_SESSION["_old"]);
     echo $blade->run($path, $data);
     $html = ob_get_contents();
     ob_end_clean();

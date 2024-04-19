@@ -14,8 +14,8 @@
             <div class="mb-3">
                 <label for="email" class="form-label required">{{ trans('email_address') }}</label>
                 <input type="text" name="email" id="email" class="form-control" placeholder="name@example.com"
-                    value="{{ old('email') }}">
-                <small class="text-danger">{{ flash('email') }}</small>
+                    value="{{ $_old['email'] }}">
+                <small class="text-danger">{{ $_flash['email'] }}</small>
             </div>
             <div class="mb-4">
                 <label for="password" class="form-label required">{{ trans('password') }}</label>
@@ -27,7 +27,7 @@
                         <i class="bi bi-eye-fill"></i>
                     </button>
                 </div>
-                <small class="text-danger">{{ flash('password') }}</small>
+                <small class="text-danger">{{ $_flash['password'] }}</small>
             </div>
             <div class="mb-4">
                 <button name="login" type="submit" class="btn btn-primary w-100">{{ trans('login') }}</button>
