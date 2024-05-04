@@ -32,7 +32,7 @@ export const getXSRFToken = () => {
 export const extendSettingTime = () => {
   const theme = getThemeMode();
   changeThemeMode(theme);
-  const themeKey = "PHPTOGGLESIDEBAR";
-  const sidebar = CookieJs.get(themeKey);
-  CookieJs.set(themeKey, sidebar, { expires: 30 });
+  const sidebarKey = "PHPTOGGLESIDEBAR";
+  const sidebar = CookieJs.get(sidebarKey) || "";
+  CookieJs.set(sidebarKey, sidebar, { expires: 30 });
 };

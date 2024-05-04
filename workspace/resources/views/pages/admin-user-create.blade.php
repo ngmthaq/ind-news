@@ -31,13 +31,13 @@
                 <div class="mb-3">
                     <label for="gender" class="form-label required">{{ trans('gender') }}</label>
                     <select class="form-select" id="gender" name="gender">
-                        <option value="1" @if ($_old['gender'] === '1') selected @endif>
+                        <option value="1" @if ($_old['gender'] === (string) Src\Models\User::MALE) selected @endif>
                             {{ trans('male') }}
                         </option>
-                        <option value="2" @if ($_old['gender'] === '2') selected @endif>
+                        <option value="2" @if ($_old['gender'] === (string) Src\Models\User::FEMALE) selected @endif>
                             {{ trans('female') }}
                         </option>
-                        <option value="3" @if ($_old['gender'] === '3') selected @endif>
+                        <option value="3" @if ($_old['gender'] === (string) Src\Models\User::OTHER) selected @endif>
                             {{ trans('other') }}
                         </option>
                     </select>
@@ -48,10 +48,10 @@
                 <div class="mb-3">
                     <label for="role" class="form-label required">{{ trans('role') }}</label>
                     <select class="form-select" id="role" name="role">
-                        <option value="1" @if ($_old['role'] === '1') selected @endif>
+                        <option value="1" @if ($_old['role'] === (string) Src\Models\User::USER) selected @endif>
                             {{ trans('user') }}
                         </option>
-                        <option value="2" @if ($_old['role'] === '2') selected @endif>
+                        <option value="2" @if ($_old['role'] === (string) Src\Models\User::ADMIN) selected @endif>
                             {{ trans('admin_long_name') }}
                         </option>
                     </select>

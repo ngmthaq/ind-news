@@ -40,6 +40,7 @@ return [
     "gender" => "Giới tính",
     "role" => "Phân quyền",
     "status" => "Trạng thái",
+    "status_long" => "Trạng thái hoạt động",
     "action" => "Hành động",
     "no_data" => "Không có dữ liệu hiển thị",
     "admin" => "QTV",
@@ -90,4 +91,6 @@ return [
     "search_user_placeholder" => "Tìm kiếm người dùng qua email hoặc tên",
     "add_new_user" => "Thêm mới người dùng",
     "edit_user" => "Cập nhật thông tin người dùng",
+    "change_avatar" => "Thay đổi ảnh đại diện",
+    "reset_password" => "Đặt lại mật khẩu"
 ];
