@@ -45,7 +45,7 @@ services:
     container_name: ${WEB_CONTAINER_NAME}
     build: ./docker/php-apache-composer-node/
     volumes:
-      - ./workspace/:/var/www/html/
+      - ./:/var/www/html/
     ports:
       - 80:80
     networks:

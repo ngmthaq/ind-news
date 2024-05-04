@@ -2,7 +2,7 @@
 
 try {
     /**
-     * ROOT DIR = workspace folder = var/www/html in docker container
+     * ROOT DIR = root folder = var/www/html in docker container
      */
     define("ROOT", str_replace("/public", "", __DIR__));
 
